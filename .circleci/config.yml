@@ -15,7 +15,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm test
       - run: npm run build
 orbs:
   node: circleci/node@3.0.0
