@@ -25,6 +25,9 @@ body {
 .review-body {
     font-family: 'Crimson Text', serif;
     color: #373838;
+    background-color: #B5C7D3;
+    padding: 5px;
+    border-radius: 10px;
 }
 .name-date {
     font-family: 'Kumbh Sans', sans-serif;
@@ -36,7 +39,7 @@ body {
 }
 /* END OF ReviewTile CSS */
 /* StarRating Subcomponent of ReviewTile CSS */
-.static-stars {
+/* .static-stars { */
     /* any extra styling for static stars on review tiles */
-}
+/* } */
 /* END OF StarRating CSS */

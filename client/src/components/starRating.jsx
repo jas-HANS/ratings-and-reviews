@@ -1,21 +1,23 @@
 // Importing Dependencies
 import React from 'react';
-import StarRatingComponent from 'react-star-rating-component';
+import PropTypes from 'prop-types';
+import ReactStars from 'react-rating-stars-component';
 
-const StaticStar = ({ rate }) => {
-  return (
-    <div>
-      <StarRatingComponent
-        name="star"
-        starColor="#F5B895"
-        emptyStarColor="#373838"
-        editing={false}
-        starCount={5}
-        value={rate}
-        className="static-stars"
-      />
-    </div>
-  );
+const StaticStar = ({ rate }) => (
+  <div>
+    <ReactStars
+      count={5}
+      size={24}
+      isHalf
+      edit={false}
+      value={rate}
+      activeColor="#ffd700"
+    />
+  </div>
+);
+
+StaticStar.propTypes = {
+  rate: PropTypes.number.isRequired,
 };
 
 export default StaticStar;
