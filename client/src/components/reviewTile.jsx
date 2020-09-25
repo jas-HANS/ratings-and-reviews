@@ -36,6 +36,7 @@ const ReviewTile = ({ summary, body, name, date }) => {
   );
 };
 
+// TO DO: PROP VALIDATION
 // ReviewTile.propTypes = {
 //   body: PropTypes.string.isRequired,
 //   summary: PropTypes.string.isRequired,
