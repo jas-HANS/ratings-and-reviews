@@ -1,7 +1,11 @@
+// Importing Dependencies
 import React, { useEffect, useState } from 'react';
 import Badge from 'react-bootstrap/Badge';
 
-const ReviewTile = ({ summary, body, name, date }) => {
+// Importing SubComponents
+import StaticStar from './starRating';
+
+const ReviewTile = ({ summary, body, name, date, rating }) => {
   const [summaryVal, changeSum] = useState(''); // Set the state for the summary
   const [bodyVal, changeBod] = useState(''); // Set the state for the body
   const [nameVal, changeName] = useState(''); // Set the state for the name
@@ -20,7 +24,7 @@ const ReviewTile = ({ summary, body, name, date }) => {
 
   return (
     <div className="review-outline">
-      {/* Star Rating Here */}
+      <StaticStar rate={rating} />
       <Badge variant="secondary" className="name-date">
         {nameVal || ''}
         {comma || ''}

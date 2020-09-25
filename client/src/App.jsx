@@ -45,6 +45,7 @@ const App = () => {
               body={reviews.body}
               name={reviews.reviewer_name}
               date={reviews.date}
+              rating={reviews.rating}
             />
             )}
           </Container>
