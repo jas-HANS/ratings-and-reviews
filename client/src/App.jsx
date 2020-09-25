@@ -1,32 +1,52 @@
-import React from 'react';
-import Jumbotron from 'react-bootstrap/Jumbotron';
+// Importing React and Hooks
+import React, { useState, useEffect } from 'react';
+
+// Importing React-Bootstrap Components
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Container } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+
+// Importing My Components
 import ReviewTile from './components/reviewTile';
-import getReviews from '../lib/routes';
+
+// Importing API Request methods
+import searchReviews from '../lib/routes';
 
 const App = () => {
-  let info;
-  getReviews((err, data) => {
-    if (err) {
-      throw err;
-    } else {
-      info = data.results;
-      console.log(info);
-    }
-  });
+  const [reviews, getReviews] = useState([]); // State of reviews for current product
+  const [loaded, isLoaded] = useState(true);
+
+  useEffect(() => { // Sets the initial state of reviews
+    searchReviews((err, data) => {
+      if (err) {
+        throw err;
+      } else {
+        const info = data.data.results[0]; // Reviews array at the first index.
+        getReviews(info); // Set the reviews state to the data from the axios request
+        if (info === undefined) { // Checking if the reviews array at the first index is undefined
+          isLoaded(true);
+        } else {
+          isLoaded(false); // Conditionally render the reviews when the data comes in
+        }
+      }
+    });
+  }, []);
 
   return (
     <div>
       <Row>
         <Col xs="0" sm="2" />
         <Col xs="12" sm="8">
+          <h1 className="title">Ratings and Reviews</h1>
           <Container className="main-container">
-            <h1 className="title">Ratings and Reviews</h1>
-            <Jumbotron>
-              <ReviewTile data={info} />
-            </Jumbotron>
+            {loaded || (
+            <ReviewTile
+              summary={reviews.summary}
+              body={reviews.body}
+              name={reviews.reviewer_name}
+              date={reviews.date}
+            />
+            )}
           </Container>
         </Col>
         <Col xs="0" sm="2" />
