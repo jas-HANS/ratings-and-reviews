@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 // Importing SubComponents
 import StaticStar from './starRating';
+import ReviewBody from './reviewBody';
 
 const ReviewTile = ({
   summary,
@@ -32,9 +33,8 @@ const ReviewTile = ({
         {dateVal || ''}
       </Badge>
       <h4 className="review-summary">{summary}</h4>
-      {/* Overflow div for summary */}
       <div className="review-body">
-        {body}
+        <ReviewBody body={body} />
       </div>
       {/* Helpful and Report Buttons */}
     </div>
