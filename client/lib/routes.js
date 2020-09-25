@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const getReviews = () => {
-  axios.get('http://52.26.193.201:3000/products/list')
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+const getReviews = (callback) => {
+  axios.get('http://52.26.193.201:3000/reviews/1/list')
+    .then((data) => callback(null, data))
+    .catch((err) => callback(err, null));
 };
 
 export default getReviews;
