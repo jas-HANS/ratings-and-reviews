@@ -12,6 +12,7 @@ const StaticStar = ({ rate }) => {
         editing={false}
         starCount={5}
         value={rate}
+        className="static-stars"
       />
     </div>
   );

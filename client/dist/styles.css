@@ -35,3 +35,8 @@ body {
     color: #0F4C81;
 }
 /* END OF ReviewTile CSS */
+/* StarRating Subcomponent of ReviewTile CSS */
+.static-stars {
+    /* any extra styling for static stars on review tiles */
+}
+/* END OF StarRating CSS */
