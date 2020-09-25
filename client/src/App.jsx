@@ -14,7 +14,7 @@ import searchReviews from '../lib/routes';
 
 const App = () => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
-  const [loaded, isLoaded] = useState(true);
+  const [loaded, isLoading] = useState(true);
 
   useEffect(() => { // Sets the initial state of reviews
     searchReviews((err, data) => {
@@ -24,9 +24,9 @@ const App = () => {
         const info = data.data.results[0]; // Reviews array at the first index.
         getReviews(info); // Set the reviews state to the data from the axios request
         if (info === undefined) { // Checking if the reviews array at the first index is undefined
-          isLoaded(true);
+          isLoading(true);
         } else {
-          isLoaded(false); // Conditionally render the reviews when the data comes in
+          isLoading(false); // Conditionally render the reviews when the data comes in
         }
       }
     });

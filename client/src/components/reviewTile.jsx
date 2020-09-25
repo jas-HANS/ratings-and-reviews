@@ -1,21 +1,22 @@
 // Importing Dependencies
 import React, { useEffect, useState } from 'react';
 import Badge from 'react-bootstrap/Badge';
+import PropTypes from 'prop-types';
 
 // Importing SubComponents
 import StaticStar from './starRating';
 
-const ReviewTile = ({ summary, body, name, date, rating }) => {
-  const [summaryVal, changeSum] = useState(''); // Set the state for the summary
-  const [bodyVal, changeBod] = useState(''); // Set the state for the body
-  const [nameVal, changeName] = useState(''); // Set the state for the name
+const ReviewTile = ({
+  summary,
+  body,
+  name,
+  date,
+  rating,
+}) => {
   const [dateVal, changeDate] = useState(''); // Set the state for the date
   const [comma, changeComma] = useState(undefined);
 
   useEffect(() => { // On Mount, set the state to that of the props passed in
-    changeSum(summary);
-    changeBod(body);
-    changeName(name);
     changeDate(date);
     if (date !== undefined) { // Conditionally render the comma in the name/date Badge
       changeComma(', ');
@@ -26,24 +27,26 @@ const ReviewTile = ({ summary, body, name, date, rating }) => {
     <div className="review-outline">
       <StaticStar rate={rating} />
       <Badge variant="secondary" className="name-date">
-        {nameVal || ''}
+        {name || ''}
         {comma || ''}
         {dateVal || ''}
       </Badge>
-      <h4 className="review-summary">{summaryVal}</h4>
+      <h4 className="review-summary">{summary}</h4>
       {/* Overflow div for summary */}
       <div className="review-body">
-        {bodyVal}
+        {body}
       </div>
       {/* Helpful and Report Buttons */}
     </div>
   );
 };
 
-// TO DO: PROP VALIDATION
-// ReviewTile.propTypes = {
-//   body: PropTypes.string.isRequired,
-//   summary: PropTypes.string.isRequired,
-// };
+ReviewTile.propTypes = {
+  summary: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+};
 
 export default ReviewTile;
