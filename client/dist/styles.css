@@ -25,10 +25,15 @@ body {
 .name-date {
     font-family: 'Kumbh Sans', sans-serif;
     font-size: small;
-    font-weight: bold;
     background-color: #B5C7D3;
     float: right;
     color: #0F4C81;
+}
+.username {
+    font-weight: bolder;
+    color: #0F4C81;
+    text-decoration: underline;
+
 }
 /* Body Component CSS */
 .review-body {
@@ -48,6 +53,7 @@ body {
 .show-more-less:hover {
     cursor: pointer;
     background-color: #B5C7D3;
+    color: #0F4C81;
 }
 /* END OF Body Component */
 

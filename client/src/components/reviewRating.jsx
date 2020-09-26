@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
 
-const StaticStar = ({ rate }) => (
+const Rating = ({ rate }) => (
   <div>
     <ReactStars
       count={5}
@@ -11,13 +11,13 @@ const StaticStar = ({ rate }) => (
       isHalf
       edit={false}
       value={rate}
-      activeColor="#ffd700"
+      activeColor="#F5B895"
     />
   </div>
 );
 
-StaticStar.propTypes = {
+Rating.propTypes = {
   rate: PropTypes.number.isRequired,
 };
 
-export default StaticStar;
+export default Rating;

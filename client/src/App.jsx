@@ -37,8 +37,8 @@ const App = () => {
       <Row>
         <Col xs="0" sm="2" />
         <Col xs="12" sm="8">
-          <h1 className="title">Ratings and Reviews</h1>
           <Container className="main-container">
+            <h1 className="title">Ratings and Reviews</h1>
             {loaded || (
             <ReviewTile
               summary={reviews.summary}

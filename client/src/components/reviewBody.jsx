@@ -19,14 +19,16 @@ const ReviewBody = ({ body }) => {
     }
   }, [body]);
 
+  const checkIfShown = (!show ? '...' : ''); // To check if the ... is needed after the text
+
   return (
     <div className="review-body">
       <p className="text-body">
         {largeText}
-        {more ? (!show ? '...' : '') : ''}
+        {more ? checkIfShown : ''}
         {show ? smallText : ''}
       </p>
-      {more ? <button type="button" className="show-more-less" onClick={() => collapseText(!show)}>{show ? 'Show Less...' : 'Show More...'}</button > : ''}
+      {more ? <button type="button" className="show-more-less" onClick={() => collapseText(!show)}>{show ? 'Show Less...' : 'Show More...'}</button> : ''}
     </div>
   );
 };
