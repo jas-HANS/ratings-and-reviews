@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Recommend from './reviewRecommend';
-
 import PropTypes from 'prop-types';
+
+import Recommend from './reviewRecommend';
 
 const ReviewBody = ({ body, recommend }) => {
   const [show, collapseText] = useState(false); // Handle the collapsing and expanding of text
@@ -38,6 +38,7 @@ const ReviewBody = ({ body, recommend }) => {
 
 ReviewBody.propTypes = {
   body: PropTypes.string.isRequired,
+  recommend: PropTypes.number.isRequired,
 };
 
 export default ReviewBody;

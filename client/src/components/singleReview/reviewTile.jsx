@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 // Importing SubComponents
 import Rating from './reviewRating';
 import ReviewBody from './reviewBody';
+import Summary from './reviewSum';
 
 const ReviewTile = ({ data }) => {
   const [dateVal, changeDate] = useState(''); // Set the state for the date
@@ -43,7 +44,7 @@ const ReviewTile = ({ data }) => {
         {comma || ''}
         {dateVal || ''}
       </Badge>
-      <h4 className="review-summary">{data.summary}</h4>
+      <Summary summary={data.summary} />
       <ReviewBody body={data.body} recommend={data.recommend} />
     </div>
   );
