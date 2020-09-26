@@ -22,6 +22,7 @@ const App = () => {
         throw err;
       } else {
         const info = data.data.results[0]; // Reviews array at the first index.
+        // -- Would iterate ovr the results making a new ReviewTile for each result
         getReviews(info); // Set the reviews state to the data from the axios request
         if (info === undefined) { // Checking if the reviews array at the first index is undefined
           reviewExists(true);
