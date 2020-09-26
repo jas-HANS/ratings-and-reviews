@@ -39,6 +39,7 @@ body {
     border-radius: 10px;
 }
 .show-more-less {
+    outline: none !important;
     opacity: 70%;
     color: #F1EEE6;
     border-radius: 10px;
