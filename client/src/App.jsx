@@ -10,14 +10,14 @@ import Container from 'react-bootstrap/Container';
 import ReviewTile from './components/singleReview/reviewTile';
 
 // Importing API Request methods
-import searchReviews from '../lib/routes';
+import query from '../lib/routes';
 
 const App = () => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
   const [exists, reviewExists] = useState(true);
 
   useEffect(() => { // Sets the initial state of reviews
-    searchReviews((err, data) => {
+    query.searchReviews((err, data) => {
       if (err) {
         throw err;
       } else {

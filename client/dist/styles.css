@@ -27,6 +27,15 @@ body {
     text-decoration: underline;
 
 }
+/* Helpful CSS */
+.helpful-yes {
+    text-decoration: underline;
+}
+.helpful-yes:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+/* END OF Helpful CSS */
 /* ReviewSum CSS */
 .review-summary-text {
     color: #0F4C81;

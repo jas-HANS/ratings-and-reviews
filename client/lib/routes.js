@@ -1,10 +1,18 @@
 import axios from 'axios';
 
 const searchReviews = (callback) => {
-  const id = 127;
+  const id = 4;
   axios.get(`http://52.26.193.201:3000/reviews/${id}/list`)
     .then((data) => callback(null, data))
     .catch((err) => callback(err, null));
 };
 
-export default searchReviews;
+const putHelpfulReview = (id, callback) => {
+  axios.put(`http://52.26.193.201:3000/reviews/helpful/${id}`)
+    .then(() => callback(null))
+    .catch((err) => callback(err));
+};
+export default {
+  searchReviews,
+  putHelpfulReview,
+};

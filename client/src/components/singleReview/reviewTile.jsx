@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Rating from './reviewRating';
 import ReviewBody from './reviewBody';
 import Summary from './reviewSum';
+import Helpful from './reviewHelpful';
 
 const ReviewTile = ({ data }) => {
   const [dateVal, changeDate] = useState(''); // Set the state for the date
@@ -46,6 +47,7 @@ const ReviewTile = ({ data }) => {
       </Badge>
       <Summary summary={data.summary} />
       <ReviewBody body={data.body} recommend={data.recommend} />
+      <Helpful helpfulness={data.helpfulness} id={data.review_id} />
     </div>
   );
 };
@@ -58,6 +60,8 @@ ReviewTile.propTypes = {
     reviewer_name: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     recommend: PropTypes.number.isRequired,
+    helpfulness: PropTypes.number.isRequired,
+    review_id: PropTypes.number.isRequired,
   }).isRequired,
 };
 
