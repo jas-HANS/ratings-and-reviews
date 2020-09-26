@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import query from '../../../lib/routes';
 
-const Helpful = ({ helpfulness, id }) => {
+const Helpful = ({ helpfulness, id, iterator }) => {
   const [currentHelp, setHelpful] = useState('');
+  const [yesClicked, setClick] = useState(true);
 
   useEffect(() => {
     setHelpful(helpfulness);
@@ -19,7 +20,8 @@ const Helpful = ({ helpfulness, id }) => {
           if (err2) {
             throw err2;
           } else {
-            setHelpful(data.data.results[0].helpfulness); // Modify this to be dynamic
+            setHelpful(data.results[iterator].helpfulness); // Modify this to be dynamic
+            setClick(false); // Conditionally render the Yes button
           }
         });
       }
@@ -29,14 +31,9 @@ const Helpful = ({ helpfulness, id }) => {
   return (
     <div>
       <div>
-        Helpful?
-        {' '}
-        <span className="helpful-yes" onClick={() => postHelp()}>Yes</span>
-        {` (${currentHelp})`}
-        {'  '}
-        |
-        {'  '}
-        Report
+        {yesClicked ? 'Helpful? ': 'Rated Helpful'}
+        {yesClicked ? <span className="helpful-yes" onClick={() => postHelp()}>Yes</span> : ''}
+        {` (${currentHelp})  |  Report`}
       </div>
     </div>
   );
@@ -45,6 +42,7 @@ const Helpful = ({ helpfulness, id }) => {
 Helpful.propTypes = {
   helpfulness: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
+  iterator: PropTypes.number.isRequired,
 };
 
 export default Helpful;

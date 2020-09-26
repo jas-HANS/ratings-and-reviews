@@ -9,17 +9,17 @@ import ReviewBody from './reviewBody';
 import Summary from './reviewSum';
 import Helpful from './reviewHelpful';
 
-const ReviewTile = ({ data }) => {
+const ReviewTile = ({ data, iterator }) => {
   const [dateVal, changeDate] = useState(''); // Set the state for the date
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const [comma, changeComma] = useState(undefined);
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   useEffect(() => { // On Mount, set the state to that of the props passed in
     changeDate(data.date);
-    if (data.date !== undefined) { // Conditionally render the comma in the name/date Badge
+    if (dateVal !== undefined) { // Conditionally render the comma in the name/date Badge
       changeComma(', ');
       // Correct the Date
-      const d = new Date(data.date);
+      const d = new Date(data.date); // Keep as the prop
       const monthID = d.getUTCMonth();
       const month = months[monthID];
       const year = d.getUTCFullYear();
@@ -35,7 +35,7 @@ const ReviewTile = ({ data }) => {
       const newDate = ` ${month} ${days}${appendDays}, ${year}`;
       changeDate(newDate);
     }
-  }, [data.date, months]);
+  }, [data.date, dateVal, months]); // ABnBLinter is requiring this for some reason.
 
   return (
     <div className="review-outline">
@@ -47,7 +47,7 @@ const ReviewTile = ({ data }) => {
       </Badge>
       <Summary summary={data.summary} />
       <ReviewBody body={data.body} recommend={data.recommend} />
-      <Helpful helpfulness={data.helpfulness} id={data.review_id} />
+      <Helpful helpfulness={data.helpfulness} id={data.review_id} iterator={iterator} />
     </div>
   );
 };
@@ -63,6 +63,7 @@ ReviewTile.propTypes = {
     helpfulness: PropTypes.number.isRequired,
     review_id: PropTypes.number.isRequired,
   }).isRequired,
+  iterator: PropTypes.number.isRequired,
 };
 
 export default ReviewTile;

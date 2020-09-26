@@ -3,7 +3,7 @@ import axios from 'axios';
 const searchReviews = (callback) => {
   const id = 4;
   axios.get(`http://52.26.193.201:3000/reviews/${id}/list`)
-    .then((data) => callback(null, data))
+    .then((data) => callback(null, data.data))
     .catch((err) => callback(err, null));
 };
 
