@@ -35,6 +35,19 @@ body {
     text-decoration: underline;
 
 }
+/* Recommend Component CSS */
+.recommend {
+    font-family: 'Crimson Text', serif;
+    padding: 2px;
+    font-weight: bolder;
+}
+.checkmark {
+    color: green;
+    padding: 3px;
+    /* background-color: #B5C7D3; */
+    border-radius: 6px;
+}
+/* END OF Recommend CSS */
 /* Body Component CSS */
 .review-body {
     font-family: 'Crimson Text', serif;

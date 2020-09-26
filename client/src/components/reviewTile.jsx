@@ -7,23 +7,17 @@ import PropTypes from 'prop-types';
 import Rating from './reviewRating';
 import ReviewBody from './reviewBody';
 
-const ReviewTile = ({
-  summary,
-  body,
-  name,
-  date,
-  rating,
-}) => {
+const ReviewTile = ({ data }) => {
   const [dateVal, changeDate] = useState(''); // Set the state for the date
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const [comma, changeComma] = useState(undefined);
 
   useEffect(() => { // On Mount, set the state to that of the props passed in
-    changeDate(date);
-    if (date !== undefined) { // Conditionally render the comma in the name/date Badge
+    changeDate(data.date);
+    if (data.date !== undefined) { // Conditionally render the comma in the name/date Badge
       changeComma(', ');
       // Correct the Date
-      const d = new Date(date);
+      const d = new Date(data.date);
       const monthID = d.getUTCMonth();
       const month = months[monthID];
       const year = d.getUTCFullYear();
@@ -39,29 +33,31 @@ const ReviewTile = ({
       const newDate = ` ${month} ${days}${appendDays}, ${year}`;
       changeDate(newDate);
     }
-  }, [date]);
+  }, [data.date, months]);
 
   return (
     <div className="review-outline">
-      <Rating rate={rating} />
+      <Rating rate={data.rating} />
       <Badge variant="secondary" className="name-date">
-        <b className="username">{name || ''}</b>
+        <b className="username">{data.reviewer_name || ''}</b>
         {comma || ''}
         {dateVal || ''}
       </Badge>
-      <h4 className="review-summary">{summary}</h4>
-      <ReviewBody body={body} />
-      {/* Helpful and Report Buttons */}
+      <h4 className="review-summary">{data.summary}</h4>
+      <ReviewBody body={data.body} recommend={data.recommend} />
     </div>
   );
 };
 
 ReviewTile.propTypes = {
-  summary: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
+  data: PropTypes.shape({
+    summary: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    reviewer_name: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    recommend: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default ReviewTile;

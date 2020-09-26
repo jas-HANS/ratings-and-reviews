@@ -41,11 +41,7 @@ const App = () => {
             <h1 className="title">Ratings and Reviews</h1>
             {loaded || (
             <ReviewTile
-              summary={reviews.summary}
-              body={reviews.body}
-              name={reviews.reviewer_name}
-              date={reviews.date}
-              rating={reviews.rating}
+              data={reviews}
             />
             )}
           </Container>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Recommend from './reviewRecommend';
+
 import PropTypes from 'prop-types';
 
-const ReviewBody = ({ body }) => {
+const ReviewBody = ({ body, recommend }) => {
   const [show, collapseText] = useState(false); // Handle the collapsing and expanding of text
   const [more, showMore] = useState(false); // Handle whether there is more to be shown or not
 
@@ -29,6 +31,7 @@ const ReviewBody = ({ body }) => {
         {show ? smallText : ''}
       </p>
       {more ? <button type="button" className="show-more-less" onClick={() => collapseText(!show)}>{show ? 'Show Less...' : 'Show More...'}</button> : ''}
+      <Recommend recommend={recommend} />
     </div>
   );
 };
