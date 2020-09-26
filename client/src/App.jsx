@@ -21,14 +21,8 @@ const App = () => {
       if (err) {
         throw err;
       } else {
-        const info = data.results; // Reviews array at the first index.
-        // -- Would iterate ovr the results making a new ReviewTile for each result
+        const info = data.results;
         getReviews(info); // Set the reviews state to the data from the axios request
-        // if (info[0] === undefined) { // Checking if the reviews array at the first index is undefined
-        //   reviewExists(true);
-        // } else {
-        //   reviewExists(false); // Conditionally render the reviews when the data comes in
-        // }
       }
     });
   }, []);
@@ -42,7 +36,6 @@ const App = () => {
             <h1 className="title">Ratings and Reviews</h1>
             {/* {exists || (<ReviewTile data={reviews} />)} */}
             {reviews.map((review, i) => (review ? <ReviewTile data={review} iterator={i} /> : ''))}
-            {/* Map through the data.data.results */}
           </Container>
         </Col>
         <Col xs="0" sm="2" />
