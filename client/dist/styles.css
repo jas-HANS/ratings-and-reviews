@@ -22,13 +22,6 @@ body {
     font-weight: bold;
     font-family: 'Kumbh Sans', sans-serif;
 }
-.review-body {
-    font-family: 'Crimson Text', serif;
-    color: #373838;
-    background-color: #B5C7D3;
-    padding: 5px;
-    border-radius: 10px;
-}
 .name-date {
     font-family: 'Kumbh Sans', sans-serif;
     font-size: small;
@@ -37,7 +30,28 @@ body {
     float: right;
     color: #0F4C81;
 }
+/* Body Component CSS */
+.review-body {
+    font-family: 'Crimson Text', serif;
+    color: #373838;
+    background-color: #B5C7D3;
+    padding: 5px;
+    border-radius: 10px;
+}
+.show-more-less {
+    opacity: 70%;
+    color: #F1EEE6;
+    border-radius: 10px;
+    background-color: #84898C;
+}
+.show-more-less:hover {
+    cursor: pointer;
+    background-color: #B5C7D3;
+}
+/* END OF Body Component */
+
 /* END OF ReviewTile CSS */
+
 /* StarRating Subcomponent of ReviewTile CSS */
 /* .static-stars { */
     /* any extra styling for static stars on review tiles */

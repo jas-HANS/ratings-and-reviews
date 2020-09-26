@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const ReviewBody = ({ body }) => {
-  const [show, collapseText] = useState(false);
+  const [show, collapseText] = useState(false); // Handle the collapsing and expanding of text
+  const [more, showMore] = useState(false); // Handle whether there is more to be shown or not
 
+  const [largeText, updateLarge] = useState(''); // This is the state of the majority of the text on the body
+  const [smallText, updateSmall] = useState(''); // This is the state of the minority of the text on the body
 
+  useEffect(() => {
+    if (body.length > 250) {
+      updateLarge(body.slice(0, 250));
+      updateSmall(body.slice(250));
+      showMore(true);
+    } else {
+      updateLarge(body);
+      showMore(false);
+    }
+  }, [body]);
 
   return (
-    <div>
-      <p>{body}</p>
+    <div className="review-body">
+      <p className="text-body">
+        {largeText}
+        {more ? (!show ? '...' : '') : ''}
+        {show ? smallText : ''}
+      </p>
+      {more ? <button type="button" className="show-more-less" onClick={() => collapseText(!show)}>{show ? 'Show Less...' : 'Show More...'}</button > : ''}
     </div>
   );
+};
+
+ReviewBody.propTypes = {
+  body: PropTypes.string.isRequired,
 };
 
 export default ReviewBody;

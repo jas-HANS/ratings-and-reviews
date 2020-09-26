@@ -22,7 +22,7 @@ const ReviewTile = ({
     if (date !== undefined) { // Conditionally render the comma in the name/date Badge
       changeComma(', ');
     }
-  }, [summary, body, name, date]);
+  }, [date]);
 
   return (
     <div className="review-outline">
@@ -33,9 +33,7 @@ const ReviewTile = ({
         {dateVal || ''}
       </Badge>
       <h4 className="review-summary">{summary}</h4>
-      <div className="review-body">
-        <ReviewBody body={body} />
-      </div>
+      <ReviewBody body={body} />
       {/* Helpful and Report Buttons */}
     </div>
   );
