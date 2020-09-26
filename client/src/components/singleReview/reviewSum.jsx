@@ -12,7 +12,7 @@ const Summary = ({ summary }) => {
   }
   return (
     <div>
-      <h5 className="review-summary-text">{showText}</h5>
+      <h5 className="review-summary-text" style={extraText ? { marginBottom: '0px' } : { marginBottom: '10px' }}>{showText}</h5>
       <span className="review-summary-extra">{extraText || ''}</span>
     </div>
   );
