@@ -9,20 +9,46 @@ body {
 }
 /* END OF Overall CSS */
 /* ReviewList CSS */
+.review-view {
+    border: 5px solid #0F4C81;
+    border-radius: 10px;
+    position: relative;
+}
+.more-reviews {
+    position: relative;
+    bottom: 10px;
+}
+.more-reviews-button {
+    font-size: 20px;
+    padding: 10px;
+    margin:auto;
+    width: 10vmax;
+    outline: none !important;
+    font-family: 'Crimson Text', serif;
+    opacity: 80%;
+    color: #F1EEE6;
+    border-radius: 10px;
+    background-color: #84898C;
+    height: 50px;
+}
+.more-reviews-button:hover {
+    cursor: pointer;
+    background-color: #B5C7D3;
+    color: #0F4C81;
+}
 .review-container {
     overflow: scroll;
-    border: 2px solid #0F4C81;
-    float: right;
-    width: 45vmax;
-    height: 33vmax;
+    width: 50vmax;
+    height: 30vmax;
+    margin-bottom: 10px;
 }
 
 /* END OF ReviewList CSS */
 /* ReviewTile CSS */
 .review-outline {
-    padding: 20px;
+    padding: 10px;
     margin: 10px;
-    border: 5px solid #0F4C81;
+    border: 2px solid #0F4C81;
     border-radius: 10px;
 }
 .name-date {
@@ -38,6 +64,10 @@ body {
     text-decoration: underline;
 
 }
+/* .review-tile-break {
+    text-align: center;
+    position: relative;
+} */
 /* Helpful CSS */
 .helpful-yes {
     text-decoration: underline;
@@ -81,7 +111,7 @@ body {
     font-family: 'Crimson Text', serif;
     color: #373838;
     background-color: #B5C7D3;
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
 }
 .show-more-less {

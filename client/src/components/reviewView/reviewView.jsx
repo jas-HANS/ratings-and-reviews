@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import query from '../../../lib/routes';
 
@@ -30,10 +30,16 @@ const ReviewView = () => {
   };
 
   return (
-    <div className="review-view">
-      <ReviewList reviews={seenReviews} />
-      <Button onClick={() => handleChange()}>{seenReviews.length === 2 ? 'More Reviews' : 'Less Reviews'}</Button>
-    </div>
+    <Container className="review-view">
+      <Col>
+        <Row>
+          <ReviewList reviews={seenReviews} />
+        </Row>
+        <div className="more-reviews">
+          <button type="button" className="more-reviews-button" onClick={() => handleChange()}>{seenReviews.length === 2 ? 'More Reviews' : 'Less Reviews'}</button>
+        </div>
+      </Col>
+    </Container>
   );
 };
 

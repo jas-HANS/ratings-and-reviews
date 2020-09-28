@@ -12,6 +12,7 @@ const putHelpfulReview = (id, callback) => {
     .then(() => callback(null))
     .catch((err) => callback(err));
 };
+
 export default {
   searchReviews,
   putHelpfulReview,
