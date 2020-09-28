@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const searchReviews = (callback) => {
+const searchReviews = (count, callback) => {
   const id = 125;
-  axios.get(`http://52.26.193.201:3000/reviews/${id}/list`)
+  axios.get(`http://52.26.193.201:3000/reviews/${id}/list`, { params: { count: count } })
     .then((data) => callback(null, data.data))
     .catch((err) => callback(err, null));
 };

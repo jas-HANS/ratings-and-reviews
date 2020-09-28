@@ -2,41 +2,52 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import query from '../../../lib/routes';
-
 import ReviewList from './reviewList';
 
 const ReviewView = () => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
-  const [seenReviews, changeSeenReviews] = useState([]);
+  const [count, countUpdate] = useState(2);
+  const [atEnd, updateEnd] = useState(false);
+  const [button, changeButton] = useState('');
 
   useEffect(() => { // Sets the initial state of reviews
-    query.searchReviews((err, data) => {
+    query.searchReviews(count + 1, (err, data) => {
       if (err) {
         throw err;
       } else {
-        const info = data.results;
+        const info = data.results.slice(0, data.results.length - 1);
         getReviews(info); // Set the reviews state to the data from the axios request
-        changeSeenReviews(info.slice(0, 2));
+        if (data.results[count] === undefined) {
+          updateEnd(true);
+        }
       }
     });
-  }, []);
+  }, [count]);
 
-  const handleChange = () => {
-    if (seenReviews.length === 2) {
-      changeSeenReviews(reviews);
+  useEffect(() => {
+    const handleChange = () => {
+      if (atEnd) {
+        countUpdate(2);
+        updateEnd(false);
+      } else {
+        countUpdate(count + 2);
+      }
+    };
+    if (atEnd) { // Show less reviews button
+      changeButton(<button type="button" className="more-reviews-button" onClick={() => handleChange()}>Less Reviews</button>);
     } else {
-      changeSeenReviews(reviews.slice(0, 2));
+      changeButton(<button type="button" className="more-reviews-button" onClick={() => handleChange()}>More Reviews</button>);
     }
-  };
+  }, [atEnd, reviews]);
 
   return (
     <Container className="review-view">
       <Col>
         <Row>
-          <ReviewList reviews={seenReviews} />
+          <ReviewList reviews={reviews} />
         </Row>
         <Row className="more-reviews">
-          <button type="button" className="more-reviews-button" onClick={() => handleChange()}>{seenReviews.length === 2 ? 'More Reviews' : 'Less Reviews'}</button>
+          {button}
         </Row>
       </Col>
     </Container>
