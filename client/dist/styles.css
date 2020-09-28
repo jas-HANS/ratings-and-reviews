@@ -8,6 +8,16 @@ body {
     margin: 100px;
 }
 /* END OF Overall CSS */
+/* ReviewList CSS */
+.review-container {
+    overflow: scroll;
+    border: 2px solid #0F4C81;
+    float: right;
+    width: 45vmax;
+    height: 33vmax;
+}
+
+/* END OF ReviewList CSS */
 /* ReviewTile CSS */
 .review-outline {
     padding: 20px;
