@@ -35,9 +35,9 @@ const ReviewView = () => {
         <Row>
           <ReviewList reviews={seenReviews} />
         </Row>
-        <div className="more-reviews">
+        <Row className="more-reviews">
           <button type="button" className="more-reviews-button" onClick={() => handleChange()}>{seenReviews.length === 2 ? 'More Reviews' : 'Less Reviews'}</button>
-        </div>
+        </Row>
       </Col>
     </Container>
   );

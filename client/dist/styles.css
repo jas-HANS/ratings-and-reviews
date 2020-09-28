@@ -16,14 +16,13 @@ body {
 }
 .more-reviews {
     position: relative;
-    bottom: 10px;
+    bottom: 15px;
 }
 .more-reviews-button {
-    font-size: 20px;
-    padding: 10px;
-    margin:auto;
-    width: 10vmax;
     outline: none !important;
+    font-size: 20px;
+    margin:auto;
+    width: 100vmax;
     font-family: 'Crimson Text', serif;
     opacity: 80%;
     color: #F1EEE6;
@@ -40,7 +39,7 @@ body {
     overflow: scroll;
     width: 50vmax;
     height: 30vmax;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 /* END OF ReviewList CSS */
