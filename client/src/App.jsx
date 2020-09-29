@@ -1,7 +1,9 @@
 // Importing React and Hooks
 import React from 'react';
 // Importing React-Bootstrap Components
-import { Row, Col, Container } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 // Importing My Components
 import ReviewView from './components/reviewView/reviewView';

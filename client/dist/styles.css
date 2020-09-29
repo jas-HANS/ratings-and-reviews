@@ -8,6 +8,35 @@ body {
     margin: 100px;
 }
 /* END OF Overall CSS */
+/* Dropdown Sort CSS */
+.sort-reviews-dropdown {
+    width: 44vmax;
+    left: 2%;
+    position: absolute;
+    font-family: 'Crimson Text', serif;
+    color: #F1EEE6;
+    background-color:rgb(241,238,230,0.5);
+    z-index: 1;
+    border-radius: 10px;
+    padding-top: 2px;
+}
+.sort-reviews-button {
+    outline: none !important;
+    padding: 5px;
+    width: 17vmax;
+    height: 2vmax;
+    background-color: #84898C;
+    color: #F1EEE6;
+}
+.sort-reviews-button:active, .sort-reviews-button:hover, .sort-reviews-button:focus{
+    background-color: #B5C7D3;
+    color: #0F4C81;
+}
+.sort-reviews-item {
+    color: #0F4C81;
+    opacity: 1;
+}
+/* END OF Dropdown Sort CSS */
 /* ReviewList CSS */
 .review-view {
     border: 5px solid #0F4C81;
@@ -37,16 +66,18 @@ body {
 }
 .review-container {
     overflow: scroll;
-    width: 50vmax;
+    width: 60vmax;
     height: 30vmax;
     margin-bottom: 15px;
+    margin-top: 13px;
 }
 
 /* END OF ReviewList CSS */
 /* ReviewTile CSS */
 .review-outline {
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
+    margin-top: 30px;
     border: 2px solid #0F4C81;
     border-radius: 10px;
 }

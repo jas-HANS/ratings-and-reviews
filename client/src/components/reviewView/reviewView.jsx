@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import query from '../../../lib/routes';
 import ReviewList from './reviewList';
@@ -13,7 +15,7 @@ const ReviewView = () => {
   const [helpfulIds, changeHelpfulIds] = useState([]);
 
   useEffect(() => { // Sets the initial state of reviews and seenReviews
-    const id = 125;
+    const id = 4;
     query.getRatingTotals(id, (error, ratings) => {
       if (error) {
         throw error;
@@ -53,8 +55,8 @@ const ReviewView = () => {
 
   return (
     <Container className="review-view">
+      <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />
       <Col>
-        <Sort func={handleDropdownChange} currentSort={sort} />
         <Row>
           <ReviewList reviews={seenReviews} help={helpfulIds} change={handleHelpfulAdd} />
         </Row>
