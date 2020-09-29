@@ -55,3 +55,8 @@ const ReviewView = () => {
 };
 
 export default ReviewView;
+
+// TALK OVER
+// - Should the reviews be rendered per click or once and then loaded out two at a time
+// -- Currently the questions are rendered by counting up and adding two to the count requested
+// -- Alternatively, request for the max and increase per every click by showing in pairs of two over the total array
