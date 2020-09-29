@@ -10,6 +10,8 @@ const ReviewView = () => {
   const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
   const [sort, changeSort] = useState('relevance');
 
+  const [helpfulIds, changeHelpfulIds] = useState([]);
+
   useEffect(() => { // Sets the initial state of reviews and seenReviews
     const id = 125;
     query.getRatingTotals(id, (error, ratings) => {
@@ -20,12 +22,17 @@ const ReviewView = () => {
         let total = 0;
         const values = Object.values(ratings);
         values.forEach((value) => { total += value; });
-        query.searchReviews(id, total, (err, data) => { // Get from the reviews with that total
+        query.searchReviews(sort, id, total, (err, data) => { // Get the reviews with that total
           if (err) {
             throw err;
           } else {
             getReviews(data.results); // Set the reviews state to the data from the axios request
-            const info = data.results.slice(0, 2);
+            let info;
+            if (seenReviews.length === 0) {
+              info = data.results.slice(0, 2);
+            } else {
+              info = data.results.slice(0, seenReviews.length);
+            }
             changeSeen(info); // Set the initial seen reviews to be only two of the reviews
           }
         });
@@ -38,12 +45,18 @@ const ReviewView = () => {
     changeSort(passedThing);
   };
 
+  const handleHelpfulAdd = (newId) => {
+    const newArr = helpfulIds;
+    newArr.push(newId);
+    changeHelpfulIds(newArr);
+  };
+
   return (
     <Container className="review-view">
       <Col>
         <Sort func={handleDropdownChange} currentSort={sort} />
         <Row>
-          <ReviewList reviews={seenReviews} />
+          <ReviewList reviews={seenReviews} help={helpfulIds} change={handleHelpfulAdd} />
         </Row>
         <Row className="more-reviews">
           {reviews.length === seenReviews.length
