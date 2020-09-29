@@ -3,10 +3,12 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import query from '../../../lib/routes';
 import ReviewList from './reviewList';
+import Sort from './dropdownSort';
 
 const ReviewView = () => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
   const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
+  const [sort, changeSort] = useState('relevance');
 
   useEffect(() => { // Sets the initial state of reviews and seenReviews
     const id = 125;
@@ -29,10 +31,17 @@ const ReviewView = () => {
         });
       }
     });
-  }, []);
+  }, [sort]);
+
+  // Handle the changing of the dropdown menu
+  const handleDropdownChange = (passedThing) => {
+    changeSort(passedThing);
+  };
+
   return (
     <Container className="review-view">
       <Col>
+        <Sort func={handleDropdownChange} currentSort={sort} />
         <Row>
           <ReviewList reviews={seenReviews} />
         </Row>
