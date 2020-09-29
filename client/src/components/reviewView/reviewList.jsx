@@ -10,7 +10,7 @@ const ReviewList = ({ reviews }) => {
   return (
     <div className="review-container">
       <div className="review-list">
-        {reviews.map((review, i) => (review ? <ReviewTile data={review} iterator={i} /> : ''))}
+        {reviews.map((review) => (review ? <ReviewTile data={review} /> : ''))}
       </div>
     </div>
   );

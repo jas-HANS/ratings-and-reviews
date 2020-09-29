@@ -3,27 +3,24 @@ import PropTypes from 'prop-types';
 
 import query from '../../../lib/routes';
 
-const Helpful = ({ helpfulness, id, iterator }) => {
+const Helpful = ({ helpfulness, id }) => {
   const [currentHelp, setHelpful] = useState('');
-  const [yesClicked, setClick] = useState(true);
+  const [yesClicked, setClick] = useState(false);
 
   useEffect(() => {
-    setHelpful(helpfulness);
-  }, [helpfulness]);
+    if (yesClicked) {
+      setHelpful(helpfulness + 1);
+    } else {
+      setHelpful(helpfulness);
+    }
+  }, [yesClicked, helpfulness]);
 
   const postHelp = () => {
     query.putHelpfulReview(id, (err1) => {
       if (err1) {
         throw err1;
       } else {
-        query.searchReviews((err2, data) => {
-          if (err2) {
-            throw err2;
-          } else {
-            setHelpful(data.results[iterator].helpfulness); // Modify this to be dynamic
-            setClick(false); // Conditionally render the Yes button
-          }
-        });
+        setClick(true); // Conditionally render the Yes button
       }
     });
   };
@@ -31,8 +28,8 @@ const Helpful = ({ helpfulness, id, iterator }) => {
   return (
     <div>
       <div>
-        {yesClicked ? 'Helpful? ': 'Rated Helpful'}
-        {yesClicked ? <span className="helpful-yes" onClick={() => postHelp()}>Yes</span> : ''}
+        {!yesClicked ? 'Helpful? ': 'Rated Helpful'}
+        {!yesClicked ? <span className="helpful-yes" onClick={() => postHelp()}>Yes</span> : ''}
         {` (${currentHelp})  |  Report`}
       </div>
     </div>
@@ -42,7 +39,6 @@ const Helpful = ({ helpfulness, id, iterator }) => {
 Helpful.propTypes = {
   helpfulness: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
-  iterator: PropTypes.number.isRequired,
 };
 
 export default Helpful;

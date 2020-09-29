@@ -6,48 +6,40 @@ import ReviewList from './reviewList';
 
 const ReviewView = () => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
-  const [count, countUpdate] = useState(2);
-  const [atEnd, updateEnd] = useState(false);
-  const [button, changeButton] = useState('');
+  const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
 
-  useEffect(() => { // Sets the initial state of reviews
-    query.searchReviews(count + 1, (err, data) => {
-      if (err) {
-        throw err;
+  useEffect(() => { // Sets the initial state of reviews and seenReviews
+    const id = 125;
+    query.getRatingTotals(id, (error, ratings) => {
+      if (error) {
+        throw error;
       } else {
-        const info = data.results.slice(0, data.results.length - 1);
-        getReviews(info); // Set the reviews state to the data from the axios request
-        if (data.results[count] === undefined) {
-          updateEnd(true);
-        }
+        // Here do the math to calculate how many total reviews there are.
+        let total = 0;
+        const values = Object.values(ratings);
+        values.forEach((value) => { total += value; });
+        query.searchReviews(id, total, (err, data) => { // Get from the reviews with that total
+          if (err) {
+            throw err;
+          } else {
+            getReviews(data.results); // Set the reviews state to the data from the axios request
+            const info = data.results.slice(0, 2);
+            changeSeen(info); // Set the initial seen reviews to be only two of the reviews
+          }
+        });
       }
     });
-  }, [count]);
-
-  useEffect(() => {
-    const handleChange = () => {
-      if (atEnd) {
-        countUpdate(2);
-        updateEnd(false);
-      } else {
-        countUpdate(count + 2);
-      }
-    };
-    if (atEnd) { // Show less reviews button
-      changeButton(<button type="button" className="more-reviews-button" onClick={() => handleChange()}>Less Reviews</button>);
-    } else {
-      changeButton(<button type="button" className="more-reviews-button" onClick={() => handleChange()}>More Reviews</button>);
-    }
-  }, [atEnd, reviews]);
-
+  }, []);
   return (
     <Container className="review-view">
       <Col>
         <Row>
-          <ReviewList reviews={reviews} />
+          <ReviewList reviews={seenReviews} />
         </Row>
         <Row className="more-reviews">
-          {button}
+          {reviews.length === seenReviews.length
+            ? <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, 2))}>Less Reviews</button>
+            : <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, seenReviews.length + 2))}>More Reviews</button> }
         </Row>
       </Col>
     </Container>
