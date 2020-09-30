@@ -1,17 +1,18 @@
 // Importing Dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactStars from 'react-rating-stars-component';
+import StarRatings from 'react-star-ratings';
 
 const Rating = ({ rate }) => (
   <div>
-    <ReactStars
-      count={5}
-      size={24}
-      isHalf
-      edit={false}
-      value={rate}
-      activeColor="#F5B895"
+    <StarRatings
+      rating={rate}
+      starRatedColor="#F5B895"
+      starEmptyColor="#B5C7D3"
+      numberOfStars={5}
+      starDimension="20px"
+      starSpacing="2px"
+      name="rating"
     />
   </div>
 );
