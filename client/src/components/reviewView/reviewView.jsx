@@ -43,8 +43,8 @@ const ReviewView = () => {
   }, [sort]);
 
   // Handle the changing of the dropdown menu
-  const handleDropdownChange = (passedThing) => {
-    changeSort(passedThing);
+  const handleDropdownChange = (newSort) => {
+    changeSort(newSort);
   };
 
   const handleHelpfulAdd = (newId) => {
@@ -55,7 +55,7 @@ const ReviewView = () => {
 
   return (
     <Container className="review-view">
-      <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} len={seenReviews.length} />
+      <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews}/>
       <Col>
         <Row>
           <ReviewList reviews={seenReviews} help={helpfulIds} change={handleHelpfulAdd} />
@@ -64,6 +64,9 @@ const ReviewView = () => {
           {reviews.length === seenReviews.length
             ? <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, 2))}>Less Reviews</button>
             : <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, seenReviews.length + 2))}>More Reviews</button> }
+          <div className="current-visible">
+            {`(${seenReviews.length}) Currently visible.`}
+          </div>
         </Row>
       </Col>
     </Container>

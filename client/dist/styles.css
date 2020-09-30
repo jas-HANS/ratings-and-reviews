@@ -12,14 +12,19 @@ body {
 .current-visible {
     font-family: 'Crimson Text', serif;
     font-size: 13px;
-    width: 100px;
+    padding: 0px;
+    margin: 0;
+    text-align: center;
+    width: 100%;
     opacity: 50%;
 }
 .review-sort-text {
-    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    margin-right: 0px;
     color: #0F4C81;
     font-family: 'Crimson Text', serif;
-    width: 11vmax;
+    width: 150px;
     padding-right: none;
     text-align: center;
 }
@@ -37,8 +42,8 @@ body {
     outline: none !important;
     box-shadow: none !important;
     padding: 5px;
-    width: 6vmax;
-    height: 2vmax;
+    width: 110px;
+    height: 40px;
     background-color: #84898C;
     color: #F1EEE6;
 }
@@ -50,7 +55,6 @@ body {
 }
 .sort-reviews-item {
     color: #0F4C81;
-    opacity: 1;
 }
 /* END OF Dropdown Sort CSS */
 /* ReviewList CSS */
