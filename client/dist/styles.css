@@ -183,6 +183,11 @@ body {
     background-color: #B5C7D3;
     color: #0F4C81;
 }
+.thumbnail-image-row {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+}
 /* END OF Body Component */
 
 /* END OF ReviewTile CSS */

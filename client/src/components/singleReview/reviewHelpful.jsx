@@ -41,7 +41,7 @@ const Helpful = ({ helpfulness, id, help, change }) => {
       <Row>
         {!yesClicked ? 'Helpful? ' : 'Rated Helpful'}
         {!yesClicked ? <span className="helpful-yes" onClick={() => postHelp()}>Yes</span> : ''}
-        {` (${currentHelp})  |  `}
+        {` (${currentHelp})   |`}
         <Reported id={3} report={change} />
       </Row>
     </div>

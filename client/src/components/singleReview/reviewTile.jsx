@@ -46,7 +46,7 @@ const ReviewTile = ({ data, help, change }) => {
         {dateVal || ''}
       </Badge>
       <Summary summary={data.summary} />
-      <ReviewBody body={data.body} recommend={data.recommend} />
+      <ReviewBody body={data.body} recommend={data.recommend} photos={data.photos} />
       <Helpful helpfulness={data.helpfulness} id={data.review_id} help={help} change={change} />
     </div>
   );
@@ -62,6 +62,7 @@ ReviewTile.propTypes = {
     recommend: PropTypes.number.isRequired,
     helpfulness: PropTypes.number.isRequired,
     review_id: PropTypes.number.isRequired,
+    photos: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   }).isRequired,
   help: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
