@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Row from 'react-bootstrap/Row';
 
 import query from '../../../lib/routes';
+import Reported from './reviewReported';
 
 const Helpful = ({ helpfulness, id, help, change }) => {
   const [currentHelp, setHelpful] = useState('');
@@ -12,7 +14,7 @@ const Helpful = ({ helpfulness, id, help, change }) => {
     if (help.includes(id)) { // If the arr contains the id (has been pressed)
       setClick(true);
     }
-  });
+  }, [help, id]); // Added this in
 
   useEffect(() => {
     if (yesClicked) {
@@ -28,19 +30,20 @@ const Helpful = ({ helpfulness, id, help, change }) => {
         throw err1;
       } else {
         // Since it is clicked, pass the id back up to the top class
-        change(id);
+        change(id, 'help');
         setClick(true); // Conditionally render the Yes button
       }
     });
   };
 
   return (
-    <div>
-      <div>
-        {!yesClicked ? 'Helpful? ': 'Rated Helpful'}
+    <div className="reviews-helpful-container">
+      <Row>
+        {!yesClicked ? 'Helpful? ' : 'Rated Helpful'}
         {!yesClicked ? <span className="helpful-yes" onClick={() => postHelp()}>Yes</span> : ''}
-        {` (${currentHelp})  |  Report`}
-      </div>
+        {` (${currentHelp})  |  `}
+        <Reported id={3} report={change} />
+      </Row>
     </div>
   );
 };
@@ -48,6 +51,8 @@ const Helpful = ({ helpfulness, id, help, change }) => {
 Helpful.propTypes = {
   helpfulness: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
+  help: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+
 };
 
 export default Helpful;

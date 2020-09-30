@@ -19,7 +19,7 @@ const Sort = ({ func, currentSort, reviews }) => {
               {currentSort.charAt(0).toUpperCase() + currentSort.slice(1)}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item className="sort-reviews-item" onClick={() => func('relevance')}>Relevance</Dropdown.Item>
+              <Dropdown.Item className="sort-reviews-item" onClick={() => func('relevant')}>Relevant</Dropdown.Item>
               <Dropdown.Item className="sort-reviews-item" onClick={() => func('helpful')}>Helpful</Dropdown.Item>
               <Dropdown.Item className="sort-reviews-item" onClick={() => func('newest')}>Newest</Dropdown.Item>
             </Dropdown.Menu>

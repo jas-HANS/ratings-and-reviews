@@ -13,6 +13,7 @@ const ReviewView = () => {
   const [sort, changeSort] = useState('relevance');
 
   const [helpfulIds, changeHelpfulIds] = useState([]);
+  const [reportedIds, changeReportedIds] = useState([]);
 
   useEffect(() => { // Sets the initial state of reviews and seenReviews
     const id = 4;
@@ -47,18 +48,25 @@ const ReviewView = () => {
     changeSort(newSort);
   };
 
-  const handleHelpfulAdd = (newId) => {
-    const newArr = helpfulIds;
-    newArr.push(newId);
-    changeHelpfulIds(newArr);
+  const handleAdd = (newId, kind) => {
+    // const newArr = '';
+    if (kind === 'help') {
+      const newArr = helpfulIds;
+      newArr.push(newId);
+      changeHelpfulIds(newArr);
+    } else {
+      const newArr = reportedIds;
+      newArr.push(newId);
+      changeReportedIds(newArr);
+    }
   };
 
   return (
     <Container className="review-view">
-      <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews}/>
+      <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />
       <Col>
         <Row>
-          <ReviewList reviews={seenReviews} help={helpfulIds} change={handleHelpfulAdd} />
+          <ReviewList reviews={seenReviews} help={helpfulIds} change={handleAdd} />
         </Row>
         <Row className="more-reviews">
           {reviews.length === seenReviews.length

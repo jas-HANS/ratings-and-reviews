@@ -18,8 +18,15 @@ const putHelpfulReview = (id, callback) => {
     .catch((err) => callback(err));
 };
 
+const putReportedReview = (id, callback) => {
+  axios.put(`http://52.26.193.201:3000/reviews/report/${id}`)
+    .then(() => callback(null))
+    .catch((err) => callback(err));
+};
+
 export default {
   searchReviews,
   putHelpfulReview,
   getRatingTotals,
+  putReportedReview,
 };
