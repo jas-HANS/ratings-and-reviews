@@ -50,13 +50,9 @@ const ReviewBody = ({ body, recommend, photos }) => {
       <Row>
         {hasImages ? photos.map((photo) => (
           <div className="thumbnail-image-row">
-            <Figure>
-              <Figure.Image onClick={() => { setCurrentImage(photo.url); setModal(true); }} key={photo.id} src={photo.url} width={100} height={100} style={{ padding: '5px', border: '5px solid #0F4C81', borderRadius: '10px', cursor: 'zoom-in' }} />
-            </Figure>
-            <Modal show={openModal} style={{ cursor: 'zoom-out' }} onHide={() => setModal(false)} onClick={() => setModal(false)}>
-              <Figure.Image src={currentImg} rounded />
-              {/* <Modal.Body>
-              </Modal.Body> */}
+            <Figure.Image onClick={() => { setCurrentImage(photo.url); setModal(true); }} key={photo.id} src={photo.url} width={100} height={100} style={{ padding: '5px', border: '5px solid #0F4C81', borderRadius: '10px', cursor: 'zoom-in' }} />
+            <Modal show={openModal} style={{ cursor: 'zoom-out', backgroundColor: 'transparent' }} onHide={() => setModal(false)} onClick={() => setModal(false)}>
+              <Figure.Image className="review-image-modal" src={currentImg} rounded />
             </Modal>
           </div>
         ))
