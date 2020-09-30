@@ -1,32 +1,14 @@
 // Importing React and Hooks
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
 // Importing React-Bootstrap Components
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
 // Importing My Components
-import ReviewTile from './components/singleReview/reviewTile';
-
-// Importing API Request methods
-import query from '../lib/routes';
+import ReviewView from './components/reviewView/reviewView';
 
 const App = () => {
-  const [reviews, getReviews] = useState([]); // State of reviews for current product
-  // const [exists, reviewExists] = useState(true);
-
-  useEffect(() => { // Sets the initial state of reviews
-    query.searchReviews((err, data) => {
-      if (err) {
-        throw err;
-      } else {
-        const info = data.results;
-        getReviews(info); // Set the reviews state to the data from the axios request
-      }
-    });
-  }, []);
-
   return (
     <div>
       <Row>
@@ -34,8 +16,14 @@ const App = () => {
         <Col xs="12" sm="8">
           <Container className="main-container">
             <h1 className="title">Ratings and Reviews</h1>
-            {/* {exists || (<ReviewTile data={reviews} />)} */}
-            {reviews.map((review, i) => (review ? <ReviewTile data={review} iterator={i} /> : ''))}
+            <Row>
+              <Col xs="12" lg="3">
+                Rating
+              </Col>
+              <Col xs="12" lg="9">
+                <ReviewView />
+              </Col>
+            </Row>
           </Container>
         </Col>
         <Col xs="0" sm="2" />
@@ -43,4 +31,5 @@ const App = () => {
     </div>
   );
 };
+
 export default App;

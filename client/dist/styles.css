@@ -5,14 +5,101 @@ body {
 }
 .title {
     text-align: left;
-    margin: 100px;
+    margin: 30px;
 }
 /* END OF Overall CSS */
+/* Dropdown Sort CSS */
+.current-visible {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    padding: 0px;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    opacity: 50%;
+}
+.review-sort-text {
+    padding-top: 10px;
+    padding-bottom: 0px;
+    margin-right: 0px;
+    color: #0F4C81;
+    font-family: 'Crimson Text', serif;
+    width: 150px;
+    padding-right: none;
+    text-align: center;
+}
+.sort-reviews-dropdown {
+    width: 10vmax;
+    position: absolute;
+    font-family: 'Crimson Text', serif;
+    color: #F1EEE6;
+    /* background-color:rgb(241,238,230,0.5); */
+    z-index: 1;
+    border-radius: 10px;
+    padding-top: 2px;
+}
+.sort-reviews-button {
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 5px;
+    width: 110px;
+    height: 40px;
+    background-color: #84898C;
+    color: #F1EEE6;
+}
+.sort-reviews-button:active:focus, .sort-reviews-button:hover, .sort-reviews-button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #B5C7D3 !important;
+    color: #0F4C81 !important;
+}
+.sort-reviews-item {
+    color: #0F4C81;
+}
+/* END OF Dropdown Sort CSS */
+/* ReviewList CSS */
+.review-view {
+    border: 5px solid #0F4C81;
+    border-radius: 10px;
+    position: relative;
+}
+.more-reviews {
+    position: relative;
+    bottom: 15px;
+}
+.more-reviews-button {
+    outline: none !important;
+    font-size: 20px;
+    margin:auto;
+    width: 100vmax;
+    font-family: 'Crimson Text', serif;
+    opacity: 80%;
+    color: #F1EEE6;
+    border-radius: 10px;
+    background-color: #84898C;
+    height: 50px;
+}
+.more-reviews-button:hover {
+    cursor: pointer;
+    background-color: #B5C7D3;
+    color: #0F4C81;
+}
+.review-container {
+    overflow: scroll;
+    width: 65vmax;
+    height: 30vmax;
+    margin-bottom: 15px;
+    margin-top: 13px;
+}
+
+/* END OF ReviewList CSS */
 /* ReviewTile CSS */
 .review-outline {
-    padding: 20px;
-    margin: 10px;
-    border: 5px solid #0F4C81;
+    width: 95%;
+    padding: 10px;
+    margin: 20px;
+    margin-top: 30px;
+    border: 2px solid #0F4C81;
     border-radius: 10px;
 }
 .name-date {
@@ -28,8 +115,19 @@ body {
     text-decoration: underline;
 
 }
+/* .review-tile-break {
+    text-align: center;
+    position: relative;
+} */
 /* Helpful CSS */
+.reviews-reported {
+    margin-left: 5px;
+}
+.reviews-helpful-container {
+    margin-left: 20px;
+}
 .helpful-yes {
+    margin-left: 5px;
     text-decoration: underline;
 }
 .helpful-yes:hover {
@@ -43,7 +141,6 @@ body {
     flex-wrap: wrap;
     font-weight: bold;
     font-size: 18px;
-    /* margin-bottom: 10px; */
     font-family: 'Kumbh Sans', sans-serif;
 }
 .review-summary-extra {
@@ -56,22 +153,30 @@ body {
 /* Recommend Component CSS */
 .recommend {
     font-family: 'Crimson Text', serif;
-    padding: 2px;
+    padding: 5px;
     font-weight: bolder;
 }
 .recommend-checkmark {
     color: green;
-    padding: 3px;
+    padding-right: 3px;
+    padding-left: 0px;
     /* background-color: #B5C7D3; */
     border-radius: 6px;
 }
 /* END OF Recommend CSS */
 /* Body Component CSS */
+.review-image-modal {
+    border-radius: 20px;
+    border: 10px solid #0F4C81 !important;
+    padding: 5px;
+    background-color: #B5C7D3;
+    margin-bottom: 0px;
+}
 .review-body {
     font-family: 'Crimson Text', serif;
     color: #373838;
     background-color: #B5C7D3;
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
 }
 .show-more-less {
@@ -85,6 +190,11 @@ body {
     cursor: pointer;
     background-color: #B5C7D3;
     color: #0F4C81;
+}
+.thumbnail-image-row {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 0px;
 }
 /* END OF Body Component */
 

@@ -1,40 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Row from 'react-bootstrap/Row';
 
 import query from '../../../lib/routes';
+import Reported from './reviewReported';
 
-const Helpful = ({ helpfulness, id, iterator }) => {
+const Helpful = ({ helpfulness, id, help, change }) => {
   const [currentHelp, setHelpful] = useState('');
-  const [yesClicked, setClick] = useState(true);
+  const [yesClicked, setClick] = useState(false);
 
   useEffect(() => {
-    setHelpful(helpfulness);
-  }, [helpfulness]);
+    // Check if passed down prop contains the current id
+    if (help.includes(id)) { // If the arr contains the id (has been pressed)
+      setClick(true);
+    }
+  }, [help, id]); // Added this in
+
+  useEffect(() => {
+    if (yesClicked) {
+      setHelpful(helpfulness + 1);
+    } else {
+      setHelpful(helpfulness);
+    }
+  }, [yesClicked, helpfulness]);
 
   const postHelp = () => {
     query.putHelpfulReview(id, (err1) => {
       if (err1) {
         throw err1;
       } else {
-        query.searchReviews((err2, data) => {
-          if (err2) {
-            throw err2;
-          } else {
-            setHelpful(data.results[iterator].helpfulness); // Modify this to be dynamic
-            setClick(false); // Conditionally render the Yes button
-          }
-        });
+        // Since it is clicked, pass the id back up to the top class
+        change(id, 'help');
+        setClick(true); // Conditionally render the Yes button
       }
     });
   };
 
   return (
-    <div>
-      <div>
-        {yesClicked ? 'Helpful? ': 'Rated Helpful'}
-        {yesClicked ? <span className="helpful-yes" onClick={() => postHelp()}>Yes</span> : ''}
-        {` (${currentHelp})  |  Report`}
-      </div>
+    <div className="reviews-helpful-container">
+      <Row>
+        {!yesClicked ? 'Helpful? ' : 'Rated Helpful'}
+        {!yesClicked ? <span className="helpful-yes" onClick={() => postHelp()}>Yes</span> : ''}
+        {` (${currentHelp})   |`}
+        <Reported id={3} report={change} />
+      </Row>
     </div>
   );
 };
@@ -42,7 +51,8 @@ const Helpful = ({ helpfulness, id, iterator }) => {
 Helpful.propTypes = {
   helpfulness: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
-  iterator: PropTypes.number.isRequired,
+  help: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+
 };
 
 export default Helpful;
