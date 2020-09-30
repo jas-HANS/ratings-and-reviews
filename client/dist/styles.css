@@ -86,7 +86,7 @@ body {
 }
 .review-container {
     overflow: scroll;
-    width: 60vmax;
+    width: 65vmax;
     height: 30vmax;
     margin-bottom: 15px;
     margin-top: 13px;
@@ -95,6 +95,7 @@ body {
 /* END OF ReviewList CSS */
 /* ReviewTile CSS */
 .review-outline {
+    width: 95%;
     padding: 10px;
     margin: 20px;
     margin-top: 30px;
@@ -140,7 +141,6 @@ body {
     flex-wrap: wrap;
     font-weight: bold;
     font-size: 18px;
-    /* margin-bottom: 10px; */
     font-family: 'Kumbh Sans', sans-serif;
 }
 .review-summary-extra {
@@ -153,12 +153,13 @@ body {
 /* Recommend Component CSS */
 .recommend {
     font-family: 'Crimson Text', serif;
-    padding: 2px;
+    padding: 5px;
     font-weight: bolder;
 }
 .recommend-checkmark {
     color: green;
-    padding: 3px;
+    padding-right: 3px;
+    padding-left: 0px;
     /* background-color: #B5C7D3; */
     border-radius: 6px;
 }

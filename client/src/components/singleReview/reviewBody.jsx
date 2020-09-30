@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Figure from 'react-bootstrap/Figure';
 import Modal from 'react-bootstrap/Modal';
-import Image from 'react-bootstrap/Image';
 
 import Recommend from './reviewRecommend';
 
@@ -18,7 +16,6 @@ const ReviewBody = ({ body, recommend, photos }) => {
   const [hasImages, setImageState] = useState(false); // Set the state if the images exist
   const [openModal, setModal] = useState(false);
   const [currentImg, setCurrentImage] = useState('');
-
 
   useEffect(() => {
     if (body.length > 250) {
@@ -56,8 +53,8 @@ const ReviewBody = ({ body, recommend, photos }) => {
             <Figure>
               <Figure.Image onClick={() => { setCurrentImage(photo.url); setModal(true); }} key={photo.id} src={photo.url} width={100} height={100} style={{ padding: '5px', border: '5px solid #0F4C81', borderRadius: '10px', cursor: 'zoom-in' }} />
             </Figure>
-            <Modal show={openModal} style={{ cursor: 'zoom-out' }} onHide={() => setModal(false)}>
-              <Figure.Image src={currentImg} onClick={() => setModal(false)} rounded />
+            <Modal show={openModal} style={{ cursor: 'zoom-out' }} onHide={() => setModal(false)} onClick={() => setModal(false)}>
+              <Figure.Image src={currentImg} rounded />
               {/* <Modal.Body>
               </Modal.Body> */}
             </Modal>
