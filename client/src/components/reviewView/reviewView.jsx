@@ -55,7 +55,7 @@ const ReviewView = () => {
 
   return (
     <Container className="review-view">
-      <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />
+      <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} len={seenReviews.length} />
       <Col>
         <Row>
           <ReviewList reviews={seenReviews} help={helpfulIds} change={handleHelpfulAdd} />

@@ -5,32 +5,48 @@ body {
 }
 .title {
     text-align: left;
-    margin: 100px;
+    margin: 30px;
 }
 /* END OF Overall CSS */
 /* Dropdown Sort CSS */
+.current-visible {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    width: 100px;
+    opacity: 50%;
+}
+.review-sort-text {
+    padding: 5px;
+    color: #0F4C81;
+    font-family: 'Crimson Text', serif;
+    width: 11vmax;
+    padding-right: none;
+    text-align: center;
+}
 .sort-reviews-dropdown {
-    width: 44vmax;
-    left: 2%;
+    width: 10vmax;
     position: absolute;
     font-family: 'Crimson Text', serif;
     color: #F1EEE6;
-    background-color:rgb(241,238,230,0.5);
+    /* background-color:rgb(241,238,230,0.5); */
     z-index: 1;
     border-radius: 10px;
     padding-top: 2px;
 }
 .sort-reviews-button {
     outline: none !important;
+    box-shadow: none !important;
     padding: 5px;
-    width: 17vmax;
+    width: 6vmax;
     height: 2vmax;
     background-color: #84898C;
     color: #F1EEE6;
 }
-.sort-reviews-button:active, .sort-reviews-button:hover, .sort-reviews-button:focus{
-    background-color: #B5C7D3;
-    color: #0F4C81;
+.sort-reviews-button:active:focus, .sort-reviews-button:hover, .sort-reviews-button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #B5C7D3 !important;
+    color: #0F4C81 !important;
 }
 .sort-reviews-item {
     color: #0F4C81;
