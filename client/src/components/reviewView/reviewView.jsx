@@ -72,7 +72,7 @@ const ReviewView = ({ id }) => {
             ? <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, 2))}>Less Reviews</button>
             : <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, seenReviews.length + 2))}>More Reviews</button> }
           <div className="current-visible">
-            {`(${seenReviews.length}) Currently visible.`}
+            {`(${seenReviews.length} Currently shown)`}
           </div>
         </Row>
       </Col>

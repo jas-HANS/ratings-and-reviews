@@ -14,9 +14,10 @@ const RatingView = ({ id }) => {
       if (err) {
         throw err;
       } else {
-        const weightedSum = (data[1] * 1) + (data[2] * 2) + (data[3] * 3) + (data[4] * 4) + (data[5] * 5);
+        const weightedSum = (data[1] * 1) + (data[2] * 2) + (data[3] * 3)
+                          + (data[4] * 4) + (data[5] * 5);
         const totalSum = data[1] + data[2] + data[3] + data[4] + data[5];
-        setRatingTotal(Math.round((weightedSum / totalSum) * 100) / 100);
+        setRatingTotal(Math.round((weightedSum / totalSum) * 10) / 10);
       }
     }, []);
   });
@@ -36,6 +37,21 @@ const RatingView = ({ id }) => {
           starSpacing="2px"
           name="overall-rating"
         />
+      </Row>
+      <Row>
+        {/* Star Breakdown Here */}
+        5
+        <br />
+        4
+        <br />
+        3
+        <br />
+        2
+        <br />
+        1
+      </Row>
+      <Row>
+        {/* Product Breakdown Here */}
       </Row>
     </Col>
   );

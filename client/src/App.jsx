@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 
 // Importing My Components
 import ReviewView from './components/reviewView/reviewView';
-import RatingView from './components/reviewRating/ratingStars';
+import RatingView from './components/reviewRating/ratingView';
 
 const App = () => {
   const productId = 4;
