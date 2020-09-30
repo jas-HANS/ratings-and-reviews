@@ -7,7 +7,7 @@ import query from '../../../lib/routes';
 import ReviewList from './reviewList';
 import Sort from './dropdownSort';
 
-const ReviewView = () => {
+const ReviewView = ({ id }) => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
   const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
   const [sort, changeSort] = useState('relevance');
@@ -16,7 +16,6 @@ const ReviewView = () => {
   const [reportedIds, changeReportedIds] = useState([]);
 
   useEffect(() => { // Sets the initial state of reviews and seenReviews
-    const id = 4;
     query.getRatingTotals(id, (error, ratings) => {
       if (error) {
         throw error;

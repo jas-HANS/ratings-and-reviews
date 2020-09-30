@@ -4,10 +4,17 @@ body {
 
 }
 .title {
+    font-family: 'Kumbh Sans', sans-serif;
     text-align: left;
     margin: 30px;
 }
 /* END OF Overall CSS */
+/* RatingStars Component CSS */
+.rating-overall-reviews {
+    font-family: 'Kumbh Sans', sans-serif;
+    padding: 5px;
+}
+/* END OF RatingStars CSS */
 /* Dropdown Sort CSS */
 .current-visible {
     font-family: 'Crimson Text', serif;
@@ -115,10 +122,6 @@ body {
     text-decoration: underline;
 
 }
-/* .review-tile-break {
-    text-align: center;
-    position: relative;
-} */
 /* Helpful CSS */
 .reviews-reported {
     margin-left: 5px;
@@ -142,6 +145,7 @@ body {
     font-weight: bold;
     font-size: 18px;
     font-family: 'Kumbh Sans', sans-serif;
+    padding-top: 10px;
 }
 .review-summary-extra {
     color: #0F4C81;
@@ -160,7 +164,6 @@ body {
     color: green;
     padding-right: 3px;
     padding-left: 0px;
-    /* background-color: #B5C7D3; */
     border-radius: 6px;
 }
 /* END OF Recommend CSS */
@@ -199,9 +202,3 @@ body {
 /* END OF Body Component */
 
 /* END OF ReviewTile CSS */
-
-/* StarRating Subcomponent of ReviewTile CSS */
-/* .static-stars { */
-    /* any extra styling for static stars on review tiles */
-/* } */
-/* END OF StarRating CSS */

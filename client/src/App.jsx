@@ -7,8 +7,10 @@ import Container from 'react-bootstrap/Container';
 
 // Importing My Components
 import ReviewView from './components/reviewView/reviewView';
+import RatingView from './components/reviewRating/ratingStars';
 
 const App = () => {
+  const productId = 4;
   return (
     <div>
       <Row>
@@ -18,10 +20,10 @@ const App = () => {
             <h1 className="title">Ratings and Reviews</h1>
             <Row>
               <Col xs="12" lg="3">
-                Rating
+                <RatingView id={productId} />
               </Col>
               <Col xs="12" lg="9">
-                <ReviewView />
+                <ReviewView id={productId} />
               </Col>
             </Row>
           </Container>
