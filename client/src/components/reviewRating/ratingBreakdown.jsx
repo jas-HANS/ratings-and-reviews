@@ -8,8 +8,8 @@ import StarRatings from 'react-star-ratings';
 
 const RatingStarBreakdown = ({ index, data, total }) => {
   return (
-    <Row className="rating-breakdown-row">
-      <Col>
+    <Row className="rating-breakdown-row" onClick={() => console.log('click')}>
+      <Col lg="6" xl="5">
         <StarRatings
           rating={index}
           starRatedColor="#F5B895"
@@ -20,7 +20,7 @@ const RatingStarBreakdown = ({ index, data, total }) => {
           name="star-breakdown"
         />
       </Col>
-      <Col className="progress-bar-ratings">
+      <Col className="progress-bar-ratings" lg="6" xl="7">
         <ProgressBar now={((data / total) * 100)} label={data} className="progress-bars-ratings" />
       </Col>
     </Row>

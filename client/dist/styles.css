@@ -206,9 +206,10 @@ body {
 
 /* END OF ReviewTile CSS */
 /* Rating Breakdown CSS */
-.star-ratings {
+/* .star-ratings-custom {
+    display: flex;
     float: right !important;
-}
+} */
 .progress-bar-ratings {
     padding: 10px;
 }
@@ -228,6 +229,12 @@ body {
     padding: 10px;
 }
 .rating-breakdown-row {
+    cursor: pointer;
     margin-right: 30px;
+    margin-left: 5px;
+    border-radius: 10px;
+}
+.rating-breakdown-row:hover {
+    background-color: #daeaf5;
 }
 /* END OF Rating Breakdown CSS */
