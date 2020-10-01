@@ -15,6 +15,7 @@ body {
 .rating-overall-reviews {
     font-family: 'Kumbh Sans', sans-serif;
     padding: 4px;
+    margin-right: 15px;
 }
 /* END OF RatingStars CSS */
 /* Dropdown Sort CSS */
@@ -204,3 +205,29 @@ body {
 /* END OF Body Component */
 
 /* END OF ReviewTile CSS */
+/* Rating Breakdown CSS */
+.star-ratings {
+    float: right !important;
+}
+.progress-bar-ratings {
+    padding: 10px;
+}
+.progress-bars-ratings {
+    height: 15px;
+    background-color: #B5C7D3;
+}
+.progress-bar {
+    float: left;
+    height: 15px;
+    color: #F1EEE6;
+    background-color: #0F4C81;
+    font-size: 10px;
+}
+.rating-breakdown-col {
+    border: 5px solid #B5C7D3;
+    padding: 10px;
+}
+.rating-breakdown-row {
+    margin-right: 30px;
+}
+/* END OF Rating Breakdown CSS */

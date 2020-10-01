@@ -19,10 +19,10 @@ const App = () => {
           <Container className="main-container">
             <h1 className="title">Ratings and Reviews</h1>
             <Row>
-              <Col xs="12" lg="3">
+              <Col lg="12" xl="4">
                 <RatingView id={productId} />
               </Col>
-              <Col xs="12" lg="9">
+              <Col lg="12" xl="8">
                 <ReviewView id={productId} />
               </Col>
             </Row>

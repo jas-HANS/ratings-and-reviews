@@ -5,8 +5,12 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import query from '../../../lib/routes';
 
+import RatingStarBreakdown from './ratingBreakdown';
+
 const RatingView = ({ id }) => {
   const [ratingTotal, setRatingTotal] = useState(0);
+  const [ratingData, setRatingData] = useState({});
+  const [totalReviews, setTotalReviews] = useState(0);
 
   useEffect(() => {
     // Query the API here and parse the information to give back the total
@@ -14,13 +18,15 @@ const RatingView = ({ id }) => {
       if (err) {
         throw err;
       } else {
+        setRatingData(data);
         const weightedSum = (data[1] * 1) + (data[2] * 2) + (data[3] * 3)
                           + (data[4] * 4) + (data[5] * 5);
         const totalSum = data[1] + data[2] + data[3] + data[4] + data[5];
+        setTotalReviews(totalSum);
         setRatingTotal(Math.round((weightedSum / totalSum) * 10) / 10);
       }
     }, []);
-  });
+  }, []);
 
   return (
     <Col>
@@ -38,18 +44,13 @@ const RatingView = ({ id }) => {
           name="overall-rating"
         />
       </Row>
+      {/* Star Breakdown Start */}
       <Row>
-        {/* Star Breakdown Here */}
-        5
-        <br />
-        4
-        <br />
-        3
-        <br />
-        2
-        <br />
-        1
+        <Col className="rating-breakdown-col">
+          {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={i} index={Number(i)} data={ratingData[i]} total={totalReviews} />)}
+        </Col>
       </Row>
+      {/* Star Breakdown End */}
       <Row>
         {/* Product Breakdown Here */}
       </Row>
