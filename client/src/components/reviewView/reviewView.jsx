@@ -8,15 +8,19 @@ import query from '../../../lib/routes';
 import ReviewList from './reviewList';
 import Sort from './dropdownSort';
 
-const ReviewView = ({ id, starSort }) => {
+const ReviewView = ({ id, changeReviews }) => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
   const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
   const [sort, changeSort] = useState('relevance');
 
-  const [sortStars, changeSortStars] = useState(starSort);
-
   const [helpfulIds, changeHelpfulIds] = useState([]);
   const [reportedIds, changeReportedIds] = useState([]);
+
+  // useEffect(() => {
+  //   changeReviews(reviews, (data) => {
+  //     changeSeen(data);
+  //   });
+  // });
 
   useEffect(() => { // Sets the initial state of reviews and seenReviews
     query.getRatingTotals(id, (error, ratings) => {
@@ -39,16 +43,16 @@ const ReviewView = ({ id, starSort }) => {
               info = data.results.slice(0, seenReviews.length);
             }
             changeSeen(info); // Set the initial seen reviews to be only two of the reviews
+            // console.log('Starsort', starSort);
           }
         });
       }
     });
   }, [sort]);
 
-  useEffect(() => {
-    changeSortStars(sortStars);
-    console.log('new', sortStars); // DOes not get here
-  }, [sortStars]);
+  // useEffect(() => {
+  //   console.log('new', sortStars); // DOes NOT get here
+  // }, [starSort]);
 
   // Handle the changing of the dropdown menu
   const handleDropdownChange = (newSort) => {
@@ -68,26 +72,26 @@ const ReviewView = ({ id, starSort }) => {
     }
   };
 
-  useEffect(() => {
-    if (!sortStars[0]) {
-      // Keep our sorted array the same
-      console.log('no sort for stars');
-      changeSeen(seenReviews);
-    } else {
-      // Sort the reviews by only the rating in the starSort array
-      const changeReviews = [];
-      console.log('Has a sort for stars');
-      sortStars.forEach((rating) => {
-        for (let i = 0; i < reviews.length; i += 1) {
-          if (reviews[i].rating === rating) {
-            changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
-          }
-        }
-      });
-      changeSeen(changeReviews);
-    }
-    // Adding a filter somewhere to show it is filtered
-  }, [sortStars]);
+  // useEffect(() => {
+  //   if (!sortStars[0]) {
+  //     // Keep our sorted array the same
+  //     console.log('no sort for stars');
+  //     changeSeen(seenReviews);
+  //   } else {
+  //     // Sort the reviews by only the rating in the starSort array
+  //     const changeReviews = [];
+  //     console.log('Has a sort for stars');
+  //     sortStars.forEach((rating) => {
+  //       for (let i = 0; i < reviews.length; i += 1) {
+  //         if (reviews[i].rating === rating) {
+  //           changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
+  //         }
+  //       }
+  //     });
+  //     changeSeen(changeReviews);
+  //   }
+  //   // Adding a filter somewhere to show it is filtered
+  // }, [sortStars]);
   return (
     <Container className="review-view">
       <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />

@@ -21,11 +21,31 @@ const App = () => {
       newArr.push(passed);
     }
     changeStarSort(newArr);
-    console.log(starSort); // Gets here
+    console.log('starsort top', starSort); // Gets here
   };
-  useEffect(() => {
-    console.log('change'); // Does not get here
-  }, [starSort]);
+  // Function that takes a list of reviews, sorts it based off the starSort
+  // And returns that new list in a callback
+  const handleSortTheReviews = (reviews, callback) => {
+    let changeReviews = [];
+    if (!starSort[0]) {
+      // Keep our sorted array the same
+      console.log('no sort for stars');
+      changeReviews = reviews;
+    } else {
+      // Sort the reviews by only the rating in the starSort array
+      changeReviews = [];
+      console.log('Has a sort for stars');
+      starSort.forEach((rating) => {
+        for (let i = 0; i < reviews.length; i += 1) {
+          if (reviews[i].rating === rating) {
+            changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
+          }
+        }
+      });
+    }
+    callback(changeReviews);
+  };
+
   return (
     <div>
       <Row>
@@ -38,7 +58,7 @@ const App = () => {
                 <RatingView id={productId} changeSort={handleChangeSort} />
               </Col>
               <Col lg="12" xl="8">
-                <ReviewView id={productId} starSort={starSort} />
+                <ReviewView id={productId} changeReviews={handleSortTheReviews} />
               </Col>
             </Row>
           </Container>
