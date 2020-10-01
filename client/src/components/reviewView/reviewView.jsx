@@ -7,7 +7,7 @@ import query from '../../../lib/routes';
 import ReviewList from './reviewList';
 import Sort from './dropdownSort';
 
-const ReviewView = ({ id }) => {
+const ReviewView = ({ id, starSortArray }) => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
   const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
   const [sort, changeSort] = useState('relevance');
@@ -35,7 +35,22 @@ const ReviewView = ({ id }) => {
             } else {
               info = data.results.slice(0, seenReviews.length);
             }
-            changeSeen(info); // Set the initial seen reviews to be only two of the reviews
+            changeSeen(info);
+            // ADDEDE HHEREREE
+            // if (starSortArray[0]) {
+            //   const changeReviews = [];
+            //   starSortArray.forEach((rating) => {
+            //     for (let i = 0; i < reviews.length; i += 1) {
+            //       if (reviews[i].rating === rating) {
+            //         changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
+            //       }
+            //     }
+            //   });
+            //   changeSeen(changeReviews);
+            // } else {
+            //   changeSeen(info); // Set the initial seen reviews to be only two of the reviews
+            // }
+            // ADDDED HEREEE
           }
         });
       }
@@ -58,6 +73,22 @@ const ReviewView = ({ id }) => {
       changeReportedIds(newArr);
     }
   };
+
+  useEffect(() => {
+    if (starSortArray[0]) {
+      const changeReviews = [];
+      starSortArray.forEach((rating) => {
+        for (let i = 0; i < reviews.length; i += 1) {
+          if (reviews[i].rating === rating) {
+            changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
+          }
+        }
+      });
+      changeSeen(changeReviews);
+    } else {
+      changeSeen(seenReviews);
+    }
+  }, [starSortArray]);
 
   return (
     <Container className="review-view">

@@ -14,13 +14,13 @@ const App = () => {
   const [starSort, changeStarSort] = useState([]);
 
   const handleChangeSort = (passed) => {
-    const newArr = starSort;
-    if (newArr.includes(passed)) {
-      newArr.splice(newArr.indexOf(passed), 1);
+    // const newArr = starSort;
+    if (starSort.includes(passed)) {
+      starSort.splice(starSort.indexOf(passed), 1);
+      changeStarSort(starSort);
     } else {
-      newArr.push(passed);
+      changeStarSort(starSort.concat(passed));
     }
-    changeStarSort(newArr);
     console.log('starsort top', starSort); // Gets here
   };
   // // Function that takes a list of reviews, sorts it based off the starSort
@@ -35,6 +35,13 @@ const App = () => {
   //       }
   //     });
 
+  // Options for SOLUTION POSSIBLY:
+  // -- Move the API calls from reviewView to here in App.jsx. This may solve the issue of
+  // having to pass props up and down through multiple components
+  // -- Sort out the keys? Read into why Angie mentioned adding unique keys to my arrays as
+  // they filter through the reviews. This could be causing the issue somehow
+  // -- Give up and start selling my body out on the streets
+
   return (
     <div>
       <Row>
@@ -47,7 +54,7 @@ const App = () => {
                 <RatingView id={productId} change={handleChangeSort} />
               </Col>
               <Col lg="12" xl="8">
-                <ReviewView id={productId} />
+                <ReviewView id={productId} starSortArray={starSort} />
               </Col>
             </Row>
           </Container>
