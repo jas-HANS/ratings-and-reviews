@@ -1,5 +1,5 @@
 // Importing React and Hooks
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 // Importing React-Bootstrap Components
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -13,9 +13,9 @@ const App = () => {
   const productId = 4;
   const [starSort, changeStarSort] = useState([]);
 
-  const handleChangeSort = (passed, kind) => {
+  const handleChangeSort = (passed) => {
     const newArr = starSort;
-    if (kind === 'remove') {
+    if (newArr.includes(passed)) {
       newArr.splice(newArr.indexOf(passed), 1);
     } else {
       newArr.push(passed);
@@ -23,28 +23,17 @@ const App = () => {
     changeStarSort(newArr);
     console.log('starsort top', starSort); // Gets here
   };
-  // Function that takes a list of reviews, sorts it based off the starSort
-  // And returns that new list in a callback
-  const handleSortTheReviews = (reviews, callback) => {
-    let changeReviews = [];
-    if (!starSort[0]) {
-      // Keep our sorted array the same
-      console.log('no sort for stars');
-      changeReviews = reviews;
-    } else {
-      // Sort the reviews by only the rating in the starSort array
-      changeReviews = [];
-      console.log('Has a sort for stars');
-      starSort.forEach((rating) => {
-        for (let i = 0; i < reviews.length; i += 1) {
-          if (reviews[i].rating === rating) {
-            changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
-          }
-        }
-      });
-    }
-    callback(changeReviews);
-  };
+  // // Function that takes a list of reviews, sorts it based off the starSort
+  // // And returns that new list in a callback
+  //     changeReviews = [];
+  //     console.log('Has a sort for stars');
+  //     starSort.forEach((rating) => {
+  //       for (let i = 0; i < reviews.length; i += 1) {
+  //         if (reviews[i].rating === rating) {
+  //           changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
+  //         }
+  //       }
+  //     });
 
   return (
     <div>
@@ -55,10 +44,10 @@ const App = () => {
             <h1 className="title">Ratings and Reviews</h1>
             <Row>
               <Col lg="12" xl="4">
-                <RatingView id={productId} changeSort={handleChangeSort} />
+                <RatingView id={productId} change={handleChangeSort} />
               </Col>
               <Col lg="12" xl="8">
-                <ReviewView id={productId} changeReviews={handleSortTheReviews} />
+                <ReviewView id={productId} />
               </Col>
             </Row>
           </Container>

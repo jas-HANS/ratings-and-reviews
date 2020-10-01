@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,19 +7,8 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import StarRatings from 'react-star-ratings';
 
 const RatingStarBreakdown = ({ index, data, total, change }) => {
-  const [hasBeenClicked, changeClick] = useState(false);
-
-  const handleAddRemoveSort = (rating) => {
-    if (hasBeenClicked) {
-      change(rating, 'remove');
-      changeClick(false);
-    } else {
-      change(rating, 'add');
-      changeClick(true);
-    }
-  };
   return (
-    <Row className="rating-breakdown-row" onClick={() => handleAddRemoveSort(index)}>
+    <Row className="rating-breakdown-row" onClick={() => change(index)}>
       <Col lg="6" xl="5">
         <StarRatings
           rating={index}
