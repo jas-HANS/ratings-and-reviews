@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import query from '../../../lib/routes';
 import Reported from './reviewReported';
 
-const Helpful = ({ helpfulness, id, help, change }) => {
+const Helpful = ({ helpfulness, id, help, change, report }) => {
   const [currentHelp, setHelpful] = useState('');
   const [yesClicked, setClick] = useState(false);
 
@@ -42,7 +42,7 @@ const Helpful = ({ helpfulness, id, help, change }) => {
         {!yesClicked ? 'Helpful? ' : 'Rated Helpful'}
         {!yesClicked ? <span className="helpful-yes" onClick={() => postHelp()}>Yes</span> : ''}
         {` (${currentHelp})   |`}
-        <Reported id={3} report={change} />
+        <Reported id={id} report={change} listOfReps={report} />
       </Row>
     </div>
   );
@@ -52,7 +52,7 @@ Helpful.propTypes = {
   helpfulness: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   help: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-
+  report: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default Helpful;

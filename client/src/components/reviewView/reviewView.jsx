@@ -65,7 +65,7 @@ const ReviewView = ({ id }) => {
       <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />
       <Col>
         <Row>
-          <ReviewList reviews={seenReviews} help={helpfulIds} change={handleAdd} />
+          <ReviewList reviews={seenReviews} help={helpfulIds} report={reportedIds} change={handleAdd} />
         </Row>
         <Row className="more-reviews">
           {reviews.length === seenReviews.length
