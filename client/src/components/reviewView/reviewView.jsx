@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,10 +8,12 @@ import query from '../../../lib/routes';
 import ReviewList from './reviewList';
 import Sort from './dropdownSort';
 
-const ReviewView = ({ id }) => {
+const ReviewView = ({ id, starSort }) => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
   const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
   const [sort, changeSort] = useState('relevance');
+
+  const [sortStars, changeSortStars] = useState(starSort);
 
   const [helpfulIds, changeHelpfulIds] = useState([]);
   const [reportedIds, changeReportedIds] = useState([]);
@@ -42,6 +45,11 @@ const ReviewView = ({ id }) => {
     });
   }, [sort]);
 
+  useEffect(() => {
+    changeSortStars(sortStars);
+    console.log('new', sortStars); // DOes not get here
+  }, [sortStars]);
+
   // Handle the changing of the dropdown menu
   const handleDropdownChange = (newSort) => {
     changeSort(newSort);
@@ -60,6 +68,26 @@ const ReviewView = ({ id }) => {
     }
   };
 
+  useEffect(() => {
+    if (!sortStars[0]) {
+      // Keep our sorted array the same
+      console.log('no sort for stars');
+      changeSeen(seenReviews);
+    } else {
+      // Sort the reviews by only the rating in the starSort array
+      const changeReviews = [];
+      console.log('Has a sort for stars');
+      sortStars.forEach((rating) => {
+        for (let i = 0; i < reviews.length; i += 1) {
+          if (reviews[i].rating === rating) {
+            changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
+          }
+        }
+      });
+      changeSeen(changeReviews);
+    }
+    // Adding a filter somewhere to show it is filtered
+  }, [sortStars]);
   return (
     <Container className="review-view">
       <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />
@@ -78,6 +106,11 @@ const ReviewView = ({ id }) => {
       </Col>
     </Container>
   );
+};
+
+ReviewView.propTypes = {
+  starSort: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default ReviewView;

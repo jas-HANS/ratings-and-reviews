@@ -7,7 +7,7 @@ import query from '../../../lib/routes';
 
 import RatingStarBreakdown from './ratingBreakdown';
 
-const RatingView = ({ id }) => {
+const RatingView = ({ id, changeSort }) => {
   const [ratingTotal, setRatingTotal] = useState(0);
   const [ratingData, setRatingData] = useState({});
   const [totalReviews, setTotalReviews] = useState(0);
@@ -47,7 +47,7 @@ const RatingView = ({ id }) => {
       {/* Star Breakdown Start */}
       <Row>
         <Col className="rating-breakdown-col">
-          {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={i} index={Number(i)} data={ratingData[i]} total={totalReviews} />)}
+          {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={i} index={Number(i)} data={ratingData[i]} total={totalReviews} change={changeSort} />)}
         </Col>
       </Row>
       {/* Star Breakdown End */}
