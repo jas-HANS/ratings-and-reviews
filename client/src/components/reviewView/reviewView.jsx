@@ -47,20 +47,22 @@ const ReviewView = ({ id, starSortArray }) => {
             throw err;
           } else {
             getReviews(data.results); // Set the reviews state to the data from the axios request
-            changeSeen(data.results);
             let info;
             if (shownReviews.length === 0) {
               if (!starSortArray[0]) {
                 info = data.results.slice(0, 2);
+                changeSeen(data.results);
               } else {
-                info = sortByFilter(data.results);
+                changeSeen(sortByFilter(data.results));
+                info = sortByFilter(data.results).slice(0, shownReviews.length);
               }
             } else if (!starSortArray[0]) {
+              changeSeen(data.results);
               info = data.results.slice(0, shownReviews.length);
             } else {
-              info = sortByFilter(data.results.slice(0, shownReviews.length));
+              changeSeen(sortByFilter(data.results));
+              info = sortByFilter(data.results).slice(0, shownReviews.length);
             }
-            // What if sort changes and there are filter options
             changeShown(info);
           }
         });

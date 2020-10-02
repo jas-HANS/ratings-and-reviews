@@ -16,6 +16,7 @@ body {
     font-family: 'Kumbh Sans', sans-serif;
     padding: 4px;
     margin-right: 15px;
+    font-weight: bold;
 }
 /* END OF RatingStars CSS */
 /* Dropdown Sort CSS */
@@ -69,8 +70,9 @@ body {
 /* END OF Dropdown Sort CSS */
 /* ReviewList CSS */
 .review-view {
-    border: 5px solid #0F4C81;
+    border: 5px solid #658DC6;
     border-radius: 10px;
+    padding: 10px;
     position: relative;
 }
 .more-reviews {
@@ -109,7 +111,7 @@ body {
     padding: 10px;
     margin: 20px;
     margin-top: 30px;
-    border: 2px solid #0F4C81;
+    border: 2px solid #658DC6;
     border-radius: 10px;
 }
 .name-date {
@@ -217,11 +219,11 @@ body {
     float: left;
     height: 15px;
     color: #F1EEE6;
-    background-color: #0F4C81;
+    background-color: #F5B895;
     font-size: 10px;
 }
 .rating-breakdown-col {
-    border: 5px solid #B5C7D3;
+    border: 5px solid #658DC6;
     padding: 10px;
 }
 .rating-breakdown-row {
@@ -231,7 +233,7 @@ body {
     border-radius: 10px;
 }
 .rating-breakdown-row:hover {
-    background-color: #daeaf5;
+    background-color: #658DC6;
 }
 /* RatingView CSS */
 .filtered-by-ratings {
@@ -243,7 +245,7 @@ body {
 .remove-filters-button {
     justify-content: center;
     font-family: 'Crimson Text', serif;
-    border: 2px solid #0F4C81;
+    border: 2px solid #658DC6;
     color: #F1EEE6;
     background-color: #84898C;
     border-radius: 5px;
@@ -261,7 +263,7 @@ body {
     font-size: 13px;
     color: #0F4C81;
     background-color: rgb(181,199,211,0.5);
-    border: 2px solid #0F4C81;
+    border: 2px solid #658DC6;
     border-radius: 10px;
     justify-content: center;
     padding: 10px;
