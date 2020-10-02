@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 import ReviewTile from '../singleReview/reviewTile';
 
@@ -10,7 +11,7 @@ const ReviewList = ({ reviews, help, change, report }) => {
   return (
     <div className="review-container">
       <div className="review-list">
-        {reviews.map((review) => (review ? <ReviewTile data={review} help={help} change={change} report={report} /> : ''))}
+        {reviews.map((review) => (review ? <ReviewTile key={uuidv4()} data={review} help={help} change={change} report={report} /> : ''))}
       </div>
     </div>
   );

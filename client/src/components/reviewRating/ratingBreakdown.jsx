@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,6 +7,13 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import StarRatings from 'react-star-ratings';
 
 const RatingStarBreakdown = ({ index, data, total, change }) => {
+  // const [value, setValue] = useState(0);
+  const [width, setWidth] = useState('100%');
+
+  // useEffect(() => {
+  //   setValue(width * ((data / total)));
+  // });
+
   return (
     <Row className="rating-breakdown-row" onClick={() => change(index)}>
       <Col lg="6" xl="5">
@@ -20,8 +27,8 @@ const RatingStarBreakdown = ({ index, data, total, change }) => {
           name="star-breakdown"
         />
       </Col>
-      <Col className="progress-bar-ratings" lg="6" xl="7">
-        <ProgressBar now={((data / total) * 100) || 0} label={data || 0} className="progress-bars-ratings" />
+      <Col className="progress-bar-ratings" lg="6" xl="7" /*style={{ width: `${width} !important` } }*/>
+        <ProgressBar now={((data / total) * 100) || 0} label={data || 0} className="progress-bars-ratings" /*style={{ width: `${value}px !important` }}*/ />
       </Col>
     </Row>
   );

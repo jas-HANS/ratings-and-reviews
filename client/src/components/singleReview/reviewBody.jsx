@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Figure from 'react-bootstrap/Figure';
@@ -49,7 +50,7 @@ const ReviewBody = ({ body, recommend, photos }) => {
       <Recommend recommend={recommend} />
       <Row>
         {hasImages ? photos.map((photo) => (
-          <div className="thumbnail-image-row">
+          <div key={uuidv4()} className="thumbnail-image-row">
             <Figure.Image onClick={() => { setCurrentImage(photo.url); setModal(true); }} key={photo.id} src={photo.url} width={100} height={100} style={{ padding: '5px', border: '5px solid #0F4C81', borderRadius: '10px', cursor: 'zoom-in' }} />
             <Modal show={openModal} style={{ cursor: 'zoom-out', backgroundColor: 'transparent' }} onHide={() => setModal(false)} onClick={() => setModal(false)}>
               <Figure.Image className="review-image-modal" src={currentImg} rounded />

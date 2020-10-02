@@ -216,6 +216,8 @@ body {
     background-color: #B5C7D3;
 }
 .progress-bar {
+    /* transition: 5s ease;
+    transition-delay: 0.5s; */
     float: left;
     height: 15px;
     color: #F1EEE6;
