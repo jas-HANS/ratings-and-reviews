@@ -10,14 +10,14 @@ import ReviewView from './components/reviewView/reviewView';
 import RatingView from './components/reviewRating/ratingView';
 
 const App = () => {
-  const productId = 4;
+  const productId = 125;
   const [starSort, changeStarSort] = useState([]);
 
   const handleChangeSort = (passed) => {
-    // const newArr = starSort;
     if (starSort.includes(passed)) {
-      starSort.splice(starSort.indexOf(passed), 1);
-      changeStarSort(starSort);
+      const newArr = [...starSort];
+      newArr.splice(newArr.indexOf(passed), 1);
+      changeStarSort(newArr);
     } else {
       changeStarSort(starSort.concat(passed));
     }
@@ -51,7 +51,7 @@ const App = () => {
             <h1 className="title">Ratings and Reviews</h1>
             <Row>
               <Col lg="12" xl="4">
-                <RatingView id={productId} change={handleChangeSort} />
+                <RatingView id={productId} change={handleChangeSort} sort={starSort} />
               </Col>
               <Col lg="12" xl="8">
                 <ReviewView id={productId} starSortArray={starSort} />

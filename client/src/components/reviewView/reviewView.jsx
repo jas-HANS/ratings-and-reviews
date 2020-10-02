@@ -10,10 +10,26 @@ import Sort from './dropdownSort';
 const ReviewView = ({ id, starSortArray }) => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
   const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
+  // const [filteredReviews, changeFilter] = useState([]);
   const [sort, changeSort] = useState('relevance');
 
   const [helpfulIds, changeHelpfulIds] = useState([]);
   const [reportedIds, changeReportedIds] = useState([]);
+
+  const sortByFilter = (reviewsToSort) => {
+    if (starSortArray[0]) {
+      const changeReviews = [];
+      starSortArray.forEach((rating) => {
+        for (let i = 0; i < reviewsToSort.length; i += 1) {
+          if (reviewsToSort[i].rating === rating) {
+            changeReviews.push(reviewsToSort[i]); // Add the reviews to the new reviews list
+          }
+        }
+      });
+      return changeReviews;
+    }
+    return reviewsToSort;
+  };
 
   useEffect(() => { // Sets the initial state of reviews and seenReviews
     query.getRatingTotals(id, (error, ratings) => {
@@ -31,26 +47,18 @@ const ReviewView = ({ id, starSortArray }) => {
             getReviews(data.results); // Set the reviews state to the data from the axios request
             let info;
             if (seenReviews.length === 0) {
-              info = data.results.slice(0, 2);
-            } else {
+              if (!starSortArray[0]) {
+                info = data.results.slice(0, 2);
+              } else {
+                info = sortByFilter(data.results);
+              }
+            } else if (!starSortArray[0]) {
               info = data.results.slice(0, seenReviews.length);
+            } else {
+              info = sortByFilter(data.results.slice(0, seenReviews.length));
             }
+            // What if sort changes and there are filter options
             changeSeen(info);
-            // ADDEDE HHEREREE
-            // if (starSortArray[0]) {
-            //   const changeReviews = [];
-            //   starSortArray.forEach((rating) => {
-            //     for (let i = 0; i < reviews.length; i += 1) {
-            //       if (reviews[i].rating === rating) {
-            //         changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
-            //       }
-            //     }
-            //   });
-            //   changeSeen(changeReviews);
-            // } else {
-            //   changeSeen(info); // Set the initial seen reviews to be only two of the reviews
-            // }
-            // ADDDED HEREEE
           }
         });
       }
@@ -76,17 +84,11 @@ const ReviewView = ({ id, starSortArray }) => {
 
   useEffect(() => {
     if (starSortArray[0]) {
-      const changeReviews = [];
-      starSortArray.forEach((rating) => {
-        for (let i = 0; i < reviews.length; i += 1) {
-          if (reviews[i].rating === rating) {
-            changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
-          }
-        }
-      });
-      changeSeen(changeReviews);
+      const newArray = sortByFilter(reviews);
+      newArray.slice(0, 2);
+      changeSeen(newArray);
     } else {
-      changeSeen(seenReviews);
+      changeSeen(reviews.slice(0, 2));
     }
   }, [starSortArray]);
 
@@ -99,8 +101,8 @@ const ReviewView = ({ id, starSortArray }) => {
         </Row>
         <Row className="more-reviews">
           {reviews.length === seenReviews.length
-            ? <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, 2))}>Less Reviews</button>
-            : <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, seenReviews.length + 2))}>More Reviews</button> }
+            ? <button type="button" className="more-reviews-button" onClick={() => changeSeen(sortByFilter(reviews).slice(0, 2))}>Less Reviews</button>
+            : <button type="button" className="more-reviews-button" onClick={() => changeSeen(sortByFilter(reviews).slice(0, seenReviews.length + 2))}>More Reviews</button> }
           <div className="current-visible">
             {`(${seenReviews.length} Currently shown)`}
           </div>

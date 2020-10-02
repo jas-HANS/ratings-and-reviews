@@ -7,7 +7,7 @@ import query from '../../../lib/routes';
 
 import RatingStarBreakdown from './ratingBreakdown';
 
-const RatingView = ({ id, change }) => {
+const RatingView = ({ id, change, sort }) => {
   const [ratingTotal, setRatingTotal] = useState(0);
   const [ratingData, setRatingData] = useState({});
   const [totalReviews, setTotalReviews] = useState(0);
@@ -48,6 +48,23 @@ const RatingView = ({ id, change }) => {
       <Row>
         <Col className="rating-breakdown-col">
           {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={i} index={Number(i)} data={ratingData[i]} total={totalReviews} change={change} />)}
+          <div className="">
+            {/* This tells the user which stars they are sorting by. */}
+            {/* Had to do a bunch of ternaries in order to check if a comma was needed */}
+            {/* Ideally this would be simplified however this seems to work. */}
+            {sort.length > 0 ? `Filtered by (
+              ${sort[0] ? `${sort[0]}` : ''}
+              ${sort[0] && sort[1] ? ',' : ''}
+              ${sort[1] ? `${sort[1]}` : ''}
+              ${sort[1] && sort[2] ? ',' : ''}
+              ${sort[2] ? `${sort[2]}` : ''}
+              ${sort[2] && sort[3] ? ',' : ''}
+              ${sort[3] ? `${sort[3]}` : ''}
+              ${sort[3] && sort[4] ? ',' : ''}
+              ${sort[4] ? `${sort[4]}` : ''}
+              ${sort[4] && sort[5] ? ',' : ''}
+              ${sort[5] ? `${sort[5]}` : ''} ).` : 'Not filtered.'}
+          </div>
         </Col>
       </Row>
       {/* Star Breakdown End */}
@@ -60,6 +77,7 @@ const RatingView = ({ id, change }) => {
 
 RatingView.propTypes = {
   id: PropTypes.number.isRequired,
+  sort: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
 };
 
 export default RatingView;
