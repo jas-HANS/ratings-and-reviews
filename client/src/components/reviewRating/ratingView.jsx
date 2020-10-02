@@ -7,7 +7,7 @@ import query from '../../../lib/routes';
 
 import RatingStarBreakdown from './ratingBreakdown';
 
-const RatingView = ({ id, change, sort }) => {
+const RatingView = ({ id, change, sort, remove }) => {
   const [ratingTotal, setRatingTotal] = useState(0);
   const [ratingData, setRatingData] = useState({});
   const [totalReviews, setTotalReviews] = useState(0);
@@ -48,22 +48,24 @@ const RatingView = ({ id, change, sort }) => {
       <Row>
         <Col className="rating-breakdown-col">
           {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={i} index={Number(i)} data={ratingData[i]} total={totalReviews} change={change} />)}
-          <div className="">
+          <div className="filtered-by-ratings">
             {/* This tells the user which stars they are sorting by. */}
             {/* Had to do a bunch of ternaries in order to check if a comma was needed */}
             {/* Ideally this would be simplified however this seems to work. */}
             {sort.length > 0 ? `Filtered by (
-              ${sort[0] ? `${sort[0]}` : ''}
+              ${sort[0] ? `${sort[0]} Stars` : ''}
               ${sort[0] && sort[1] ? ',' : ''}
-              ${sort[1] ? `${sort[1]}` : ''}
+              ${sort[1] ? `${sort[1]} Stars` : ''}
               ${sort[1] && sort[2] ? ',' : ''}
-              ${sort[2] ? `${sort[2]}` : ''}
+              ${sort[2] ? `${sort[2]} Stars` : ''}
               ${sort[2] && sort[3] ? ',' : ''}
-              ${sort[3] ? `${sort[3]}` : ''}
+              ${sort[3] ? `${sort[3]} Stars` : ''}
               ${sort[3] && sort[4] ? ',' : ''}
-              ${sort[4] ? `${sort[4]}` : ''}
+              ${sort[4] ? `${sort[4]} Stars` : ''}
               ${sort[4] && sort[5] ? ',' : ''}
-              ${sort[5] ? `${sort[5]}` : ''} ).` : 'Not filtered.'}
+              ${sort[5] ? `${sort[5]} Stars` : ''} ).` : 'Not filtered.'}
+            <br />
+            {sort.length !== 0 ? <input className="remove-filters-button" type="button" value="Remove Filters" onClick={() => remove()} /> : ''}
           </div>
         </Col>
       </Row>

@@ -237,4 +237,17 @@ body {
 .rating-breakdown-row:hover {
     background-color: #daeaf5;
 }
+/* RatingView CSS */
+.filtered-by-ratings {
+    font-size: 11px;
+    color: #B5C7D3;
+    text-align: center;
+}
+.remove-filters-button {
+    border-radius: 5px;
+    align-items: center;
+    font-size: 11px;
+    height: 20px;
+    width: 100px;
+}
 /* END OF Rating Breakdown CSS */

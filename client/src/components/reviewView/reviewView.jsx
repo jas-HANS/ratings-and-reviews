@@ -6,13 +6,15 @@ import Col from 'react-bootstrap/Col';
 import query from '../../../lib/routes';
 import ReviewList from './reviewList';
 import Sort from './dropdownSort';
+import { ProgressBar } from 'react-bootstrap';
 
 const ReviewView = ({ id, starSortArray }) => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
   const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
-  // const [filteredReviews, changeFilter] = useState([]);
+  const [shownReviews, changeShown] = useState([]);
   const [sort, changeSort] = useState('relevance');
 
+  const [showLess, setShowLess] = useState(false);
   const [helpfulIds, changeHelpfulIds] = useState([]);
   const [reportedIds, changeReportedIds] = useState([]);
 
@@ -45,20 +47,21 @@ const ReviewView = ({ id, starSortArray }) => {
             throw err;
           } else {
             getReviews(data.results); // Set the reviews state to the data from the axios request
+            changeSeen(data.results);
             let info;
-            if (seenReviews.length === 0) {
+            if (shownReviews.length === 0) {
               if (!starSortArray[0]) {
                 info = data.results.slice(0, 2);
               } else {
                 info = sortByFilter(data.results);
               }
             } else if (!starSortArray[0]) {
-              info = data.results.slice(0, seenReviews.length);
+              info = data.results.slice(0, shownReviews.length);
             } else {
-              info = sortByFilter(data.results.slice(0, seenReviews.length));
+              info = sortByFilter(data.results.slice(0, shownReviews.length));
             }
             // What if sort changes and there are filter options
-            changeSeen(info);
+            changeShown(info);
           }
         });
       }
@@ -85,26 +88,49 @@ const ReviewView = ({ id, starSortArray }) => {
   useEffect(() => {
     if (starSortArray[0]) {
       const newArray = sortByFilter(reviews);
-      newArray.slice(0, 2);
       changeSeen(newArray);
+      if (shownReviews.length === 0 || shownReviews.length === 1) {
+        changeShown(newArray.slice(0, 2));
+      } else {
+        changeShown(newArray.slice(0, shownReviews.length));
+      }
     } else {
-      changeSeen(reviews.slice(0, 2));
+      changeSeen(reviews);
+      if (shownReviews.length === 1 || shownReviews.length === 2) {
+        changeShown(reviews.slice(0, 2));
+      } else {
+        changeShown(reviews.slice(0, shownReviews.length));
+      }
     }
   }, [starSortArray]);
+
+  useEffect(() => {
+    if (seenReviews.length <= 2 && seenReviews.length === shownReviews.length) {
+      // Set boolean to true
+      setShowLess(true);
+    } else {
+      // Set boolean to false
+      setShowLess(false);
+    }
+  });
+
+  const showButton = showLess
+    ? ''
+    : <button type="button" className="more-reviews-button" onClick={() => changeShown(seenReviews.slice(0, 2))}>Less Reviews</button>;
 
   return (
     <Container className="review-view">
       <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />
       <Col>
         <Row>
-          <ReviewList reviews={seenReviews} help={helpfulIds} report={reportedIds} change={handleAdd} />
+          <ReviewList reviews={shownReviews} help={helpfulIds} report={reportedIds} change={handleAdd} />
         </Row>
         <Row className="more-reviews">
-          {reviews.length === seenReviews.length
-            ? <button type="button" className="more-reviews-button" onClick={() => changeSeen(sortByFilter(reviews).slice(0, 2))}>Less Reviews</button>
-            : <button type="button" className="more-reviews-button" onClick={() => changeSeen(sortByFilter(reviews).slice(0, seenReviews.length + 2))}>More Reviews</button> }
+          {seenReviews.length === shownReviews.length
+            ? showButton
+            : <button type="button" className="more-reviews-button" onClick={() => changeShown(seenReviews.slice(0, shownReviews.length + 2))}>More Reviews</button> }
           <div className="current-visible">
-            {`(${seenReviews.length} Currently shown)`}
+            {`(${shownReviews.length} Currently shown)`}
           </div>
         </Row>
       </Col>

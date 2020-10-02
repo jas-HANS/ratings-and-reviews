@@ -10,7 +10,7 @@ import ReviewView from './components/reviewView/reviewView';
 import RatingView from './components/reviewRating/ratingView';
 
 const App = () => {
-  const productId = 125;
+  const productId = 4;
   const [starSort, changeStarSort] = useState([]);
 
   const handleChangeSort = (passed) => {
@@ -23,17 +23,10 @@ const App = () => {
     }
     console.log('starsort top', starSort); // Gets here
   };
-  // // Function that takes a list of reviews, sorts it based off the starSort
-  // // And returns that new list in a callback
-  //     changeReviews = [];
-  //     console.log('Has a sort for stars');
-  //     starSort.forEach((rating) => {
-  //       for (let i = 0; i < reviews.length; i += 1) {
-  //         if (reviews[i].rating === rating) {
-  //           changeReviews.push(reviews[i]); // Add the reviews to the new reviews list
-  //         }
-  //       }
-  //     });
+
+  const handleRemoveSort = () => {
+    changeStarSort([]);
+  };
 
   // Options for SOLUTION POSSIBLY:
   // -- Move the API calls from reviewView to here in App.jsx. This may solve the issue of
@@ -51,7 +44,7 @@ const App = () => {
             <h1 className="title">Ratings and Reviews</h1>
             <Row>
               <Col lg="12" xl="4">
-                <RatingView id={productId} change={handleChangeSort} sort={starSort} />
+                <RatingView id={productId} change={handleChangeSort} sort={starSort} remove={handleRemoveSort} />
               </Col>
               <Col lg="12" xl="8">
                 <ReviewView id={productId} starSortArray={starSort} />
