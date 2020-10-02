@@ -114,6 +114,7 @@ const ReviewView = ({ id, starSortArray }) => {
     }
   });
 
+  // Conditionally render the button if there are NOT less than 2 total in the list
   const showButton = showLess
     ? ''
     : <button type="button" className="more-reviews-button" onClick={() => changeShown(seenReviews.slice(0, 2))}>Less Reviews</button>;

@@ -30,7 +30,7 @@ const RatingView = ({ id, change, sort, remove }) => {
 
   return (
     <Col>
-      <Row>
+      <Row style={{ justifyContent: 'center' }}>
         <h3 className="rating-overall-reviews">
           {ratingTotal}
         </h3>
