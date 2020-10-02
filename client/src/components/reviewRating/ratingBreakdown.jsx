@@ -21,7 +21,7 @@ const RatingStarBreakdown = ({ index, data, total, change }) => {
         />
       </Col>
       <Col className="progress-bar-ratings" lg="6" xl="7">
-        <ProgressBar now={((data / total) * 100)} label={data} className="progress-bars-ratings" />
+        <ProgressBar now={((data / total) * 100) || 0} label={data || 0} className="progress-bars-ratings" />
       </Col>
     </Row>
   );

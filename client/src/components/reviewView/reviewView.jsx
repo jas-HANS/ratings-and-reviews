@@ -108,6 +108,10 @@ const ReviewView = ({ id, starSortArray }) => {
     if (seenReviews.length <= 2 && seenReviews.length === shownReviews.length) {
       // Set boolean to true
       setShowLess(true);
+    } else if (shownReviews.length === 0) {
+      // So that the list sets back to two when a filter has no reviews
+      changeShown(reviews.slice(0, 2));
+      setShowLess(false);
     } else {
       // Set boolean to false
       setShowLess(false);

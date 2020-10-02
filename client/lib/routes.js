@@ -25,7 +25,7 @@ const putHelpfulReview = (id, callback) => {
 };
 
 const putReportedReview = (id, callback) => {
-  axios.put(`http://52.26.193.201:3000/reviews/${id}/meta`)
+  axios.put(`http://52.26.193.201:3000/reviews/report/${id}`)
     .then(() => callback(null))
     .catch((err) => callback(err));
 };

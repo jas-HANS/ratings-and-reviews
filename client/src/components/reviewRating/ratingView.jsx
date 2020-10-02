@@ -33,7 +33,7 @@ const RatingView = ({ id, change, sort, remove }) => {
       } else {
         const isRec = data[1];
         const total = data[1] + data[0];
-        setRecommend((isRec / total) * 100);
+        setRecommend(Math.round((isRec / total) * 100));
       }
     });
   }, []);
@@ -42,10 +42,10 @@ const RatingView = ({ id, change, sort, remove }) => {
     <Col>
       <Row style={{ justifyContent: 'center' }}>
         <h3 className="rating-overall-reviews">
-          {ratingTotal}
+          {ratingTotal || 0}
         </h3>
         <StarRatings
-          rating={ratingTotal}
+          rating={ratingTotal || 0}
           starRatedColor="#F5B895"
           starEmptyColor="#B5C7D3"
           numberOfStars={5}
@@ -55,7 +55,7 @@ const RatingView = ({ id, change, sort, remove }) => {
         />
       </Row>
       <Row className="recommend-reviewers">
-        {`${recommend}% of reviewers recommend this product!`}
+        {ratingTotal ? `${recommend}% of reviewers recommend this product!` : 'No recommended reviews!'}
       </Row>
       <Row>
         <Col className="rating-breakdown-col">
