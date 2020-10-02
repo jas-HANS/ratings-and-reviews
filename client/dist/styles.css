@@ -206,10 +206,6 @@ body {
 
 /* END OF ReviewTile CSS */
 /* Rating Breakdown CSS */
-/* .star-ratings-custom {
-    display: flex;
-    float: right !important;
-} */
 .progress-bar-ratings {
     padding: 10px;
 }
@@ -239,16 +235,19 @@ body {
 }
 /* RatingView CSS */
 .filtered-by-ratings {
-    font-size: 11px;
+    font-family: 'Crimson Text', serif;
+    font-size: 12px;
     color: #B5C7D3;
     text-align: center;
 }
 .remove-filters-button {
+    justify-content: center;
+    font-family: 'Crimson Text', serif;
     border: 2px solid #0F4C81;
     color: #F1EEE6;
     background-color: #84898C;
     border-radius: 5px;
-    font-size: 8px;
+    font-size: 10px;
     height: 20px;
     width: 80px;
 }
@@ -256,5 +255,16 @@ body {
     cursor: pointer;
     background-color: #B5C7D3;
     color: #0F4C81;
+}
+.recommend-reviewers {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 13px;
+    color: #0F4C81;
+    background-color: rgb(181,199,211,0.5);
+    border: 2px solid #0F4C81;
+    border-radius: 10px;
+    justify-content: center;
+    padding: 10px;
+    margin-bottom: 5px;
 }
 /* END OF Rating Breakdown CSS */

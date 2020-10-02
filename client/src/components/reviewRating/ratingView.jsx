@@ -11,6 +11,7 @@ const RatingView = ({ id, change, sort, remove }) => {
   const [ratingTotal, setRatingTotal] = useState(0);
   const [ratingData, setRatingData] = useState({});
   const [totalReviews, setTotalReviews] = useState(0);
+  const [recommend, setRecommend] = useState(0);
 
   useEffect(() => {
     // Query the API here and parse the information to give back the total
@@ -26,6 +27,15 @@ const RatingView = ({ id, change, sort, remove }) => {
         setRatingTotal(Math.round((weightedSum / totalSum) * 10) / 10);
       }
     }, []);
+    query.getRecommendedTotal(id, (err, data) => {
+      if (err) {
+        throw err;
+      } else {
+        const isRec = data[1];
+        const total = data[1] + data[0];
+        setRecommend((isRec / total) * 100);
+      }
+    });
   }, []);
 
   return (
@@ -44,7 +54,9 @@ const RatingView = ({ id, change, sort, remove }) => {
           name="overall-rating"
         />
       </Row>
-      {/* Star Breakdown Start */}
+      <Row className="recommend-reviewers">
+        {`${recommend}% of reviewers recommend this product!`}
+      </Row>
       <Row>
         <Col className="rating-breakdown-col">
           {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={i} index={Number(i)} data={ratingData[i]} total={totalReviews} change={change} />)}
@@ -69,7 +81,6 @@ const RatingView = ({ id, change, sort, remove }) => {
           </div>
         </Col>
       </Row>
-      {/* Star Breakdown End */}
       <Row>
         {/* Product Breakdown Here */}
       </Row>
