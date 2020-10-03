@@ -21,7 +21,7 @@ const SingleProductBreakdown = ({ char, data }) => {
     } else if (currentName === 'Length' || currentName === 'Width') {
       changeLabel(['Too short', 'Perfect', 'Too long']);
     }
-  }, [char, data, currentName]);
+  }, [data, char, currentName]);
 
   useEffect(() => {
     if (label.length !== 0) {
@@ -51,7 +51,7 @@ const SingleProductBreakdown = ({ char, data }) => {
         </Row>
         {labelRow}
         <Row className="product-bar-row">
-          <ProgressBar className="product-bars" now={percent} animated={false} />
+          <ProgressBar className="product-bars" now={percent} />
         </Row>
       </Col>
     </Row>

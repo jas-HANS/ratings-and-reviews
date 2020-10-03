@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import StarRatings from 'react-star-ratings';
+import { v4 as uuidv4 } from 'uuid'; 
 import PropTypes from 'prop-types';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -68,7 +69,7 @@ const RatingView = ({ id, change, sort, remove }) => {
       </Row>
       <Row>
         <Col className="rating-breakdown-col">
-          {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={i} index={Number(i)} data={Number(ratingData[i])} total={totalReviews} change={change} />)}
+          {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={uuidv4()} index={Number(i)} data={Number(ratingData[i])} total={totalReviews} change={change} />)}
           <div className="filtered-by-ratings">
             {/* This tells the user which stars they are sorting by. */}
             {/* Had to do a bunch of ternaries in order to check if a comma was needed */}
