@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import query from '../../../lib/routes';
 
 import RatingStarBreakdown from './ratingBreakdown';
+import ProductBreakdown from './productBreakdown';
 
 const RatingView = ({ id, change, sort, remove }) => {
   const [ratingTotal, setRatingTotal] = useState(0);
@@ -34,7 +35,7 @@ const RatingView = ({ id, change, sort, remove }) => {
         setTotalReviews(totalSum);
         setRatingTotal(Math.round((weightedSum / totalSum) * 10) / 10);
       }
-    }, []);
+    });
     query.getRecommendedTotal(id, (err, data) => {
       if (err) {
         throw err;
@@ -67,7 +68,7 @@ const RatingView = ({ id, change, sort, remove }) => {
       </Row>
       <Row>
         <Col className="rating-breakdown-col">
-          {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={i} index={Number(i)} data={ratingData[i]} total={totalReviews} change={change} />)}
+          {Object.keys(ratingData).map((i) => <RatingStarBreakdown key={i} index={Number(i)} data={Number(ratingData[i])} total={totalReviews} change={change} />)}
           <div className="filtered-by-ratings">
             {/* This tells the user which stars they are sorting by. */}
             {/* Had to do a bunch of ternaries in order to check if a comma was needed */}
@@ -90,10 +91,7 @@ const RatingView = ({ id, change, sort, remove }) => {
         </Col>
       </Row>
       <Row>
-        {/* Product Breakdown Here */}
-        <Col>
-          Here 
-        </Col>
+        <ProductBreakdown id={id} />
       </Row>
     </Col>
   );

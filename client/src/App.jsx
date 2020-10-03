@@ -10,7 +10,7 @@ import ReviewView from './components/reviewView/reviewView';
 import RatingView from './components/reviewRating/ratingView';
 
 const App = () => {
-  const productId = 150;
+  const productId = 4;
   const [starSort, changeStarSort] = useState([]);
 
   const handleChangeSort = (passed) => {

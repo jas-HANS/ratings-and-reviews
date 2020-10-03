@@ -7,12 +7,12 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import StarRatings from 'react-star-ratings';
 
 const RatingStarBreakdown = ({ index, data, total, change }) => {
-  // const [value, setValue] = useState(0);
+  const [percent, setPercent] = useState(0);
   // const [width, setWidth] = useState('100%');
 
-  // useEffect(() => {
-  //   setValue(width * ((data / total)));
-  // });
+  useEffect(() => {
+    setPercent(((data / total) * 100));
+  }, [data, total]);
 
   return (
     <Row className="rating-breakdown-row" onClick={() => change(index)}>
@@ -27,8 +27,8 @@ const RatingStarBreakdown = ({ index, data, total, change }) => {
           name="star-breakdown"
         />
       </Col>
-      <Col className="progress-bar-ratings" lg="6" xl="7" /*style={{ width: `${width} !important` } }*/>
-        <ProgressBar now={((data / total) * 100) || 0} label={data || 0} className="progress-bars-ratings" /*style={{ width: `${value}px !important` }}*/ />
+      <Col className="progress-bar-ratings" lg="6" xl="7">
+        <ProgressBar now={percent || 0} label={data || 0} className="progress-bars-ratings" />
       </Col>
     </Row>
   );
