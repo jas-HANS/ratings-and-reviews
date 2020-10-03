@@ -8,7 +8,7 @@ import StarRatings from 'react-star-ratings';
 
 const RatingStarBreakdown = ({ index, data, total, change }) => {
   // const [value, setValue] = useState(0);
-  const [width, setWidth] = useState('100%');
+  // const [width, setWidth] = useState('100%');
 
   // useEffect(() => {
   //   setValue(width * ((data / total)));

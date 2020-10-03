@@ -91,6 +91,9 @@ const RatingView = ({ id, change, sort, remove }) => {
       </Row>
       <Row>
         {/* Product Breakdown Here */}
+        <Col>
+          Here 
+        </Col>
       </Row>
     </Col>
   );
