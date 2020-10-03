@@ -10,7 +10,7 @@ import ReviewView from './components/reviewView/reviewView';
 import RatingView from './components/reviewRating/ratingView';
 
 const App = () => {
-  const productId = 125;
+  const productId = 200;
   const [starSort, changeStarSort] = useState([]);
 
   const handleChangeSort = (passed) => {
@@ -26,13 +26,6 @@ const App = () => {
   const handleRemoveSort = () => {
     changeStarSort([]);
   };
-
-  // Options for SOLUTION POSSIBLY:
-  // -- Move the API calls from reviewView to here in App.jsx. This may solve the issue of
-  // having to pass props up and down through multiple components
-  // -- Sort out the keys? Read into why Angie mentioned adding unique keys to my arrays as
-  // they filter through the reviews. This could be causing the issue somehow
-  // -- Give up and start selling my body out on the streets
 
   return (
     <div>

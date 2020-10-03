@@ -19,10 +19,18 @@ const RatingView = ({ id, change, sort, remove }) => {
       if (err) {
         throw err;
       } else {
-        setRatingData(data);
-        const weightedSum = (data[1] * 1) + (data[2] * 2) + (data[3] * 3)
-                          + (data[4] * 4) + (data[5] * 5);
-        const totalSum = data[1] + data[2] + data[3] + data[4] + data[5];
+        const keys = Object.keys(data);
+        // console.log(keys);
+        const newObject = { ...data };
+        for (let i = 1; i <= 5; i += 1) {
+          if (!keys.includes(i.toString())) {
+            newObject[i] = 0;
+          }
+        }
+        setRatingData(newObject);
+        const weightedSum = (newObject[1] * 1) + (newObject[2] * 2) + (newObject[3] * 3)
+                          + (newObject[4] * 4) + (newObject[5] * 5);
+        const totalSum = newObject[1] + newObject[2] + newObject[3] + newObject[4] + newObject[5];
         setTotalReviews(totalSum);
         setRatingTotal(Math.round((weightedSum / totalSum) * 10) / 10);
       }
