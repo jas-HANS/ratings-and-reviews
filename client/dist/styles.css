@@ -67,13 +67,26 @@ body {
 .sort-reviews-item {
     color: #0F4C81;
 }
+/* Start of AddReview CSS */
+.add-reviews {
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 5px;
+    width: 150px;
+    height: 40px;
+    background-color: #84898C;
+    color: #F1EEE6;
+    border-radius: 10px;
+}
+/* END OF AddReview CSS */
 /* END OF Dropdown Sort CSS */
 /* ReviewList CSS */
 .review-view {
     border: 5px solid #658DC6;
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 10px;
     position: relative;
+    margin-top: 35px;
 }
 .more-reviews {
     position: relative;
