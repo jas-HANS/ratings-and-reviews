@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import AddReview from './addReviews';
 
-const Sort = ({ func, currentSort, reviews }) => {
+const Sort = ({ func, currentSort, reviews, id }) => {
   return (
     <div>
       <Row>
@@ -28,7 +28,7 @@ const Sort = ({ func, currentSort, reviews }) => {
           </Dropdown>
         </Col>
         <Col xs="3">
-          <AddReview />
+          <AddReview id={id} />
         </Col>
       </Row>
     </div>
@@ -39,6 +39,7 @@ Sort.propTypes = {
   func: PropTypes.func.isRequired,
   currentSort: PropTypes.string.isRequired,
   reviews: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Sort;

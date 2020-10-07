@@ -127,7 +127,7 @@ const ReviewView = ({ id, starSortArray }) => {
   return (
     <Container className="review-view">
       <Col>
-        <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />
+        <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} id={id} />
         <Row>
           <ReviewList reviews={shownReviews} help={helpfulIds} report={reportedIds} change={handleAdd} />
         </Row>
