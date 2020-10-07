@@ -4,7 +4,9 @@ import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
 import PropTypes from 'prop-types';
 
-const Sort = ({ func, currentSort, reviews }) => {
+import AddReview from './addReviews';
+
+const Sort = ({ func, currentSort, reviews, id }) => {
   return (
     <div>
       <Row>
@@ -13,7 +15,7 @@ const Sort = ({ func, currentSort, reviews }) => {
             {`(${reviews.length}) Reviews, sorted by `}
           </div>
         </Col>
-        <Col xs="9">
+        <Col xs="6">
           <Dropdown className="sort-reviews-dropdown">
             <Dropdown.Toggle variant="secondary" className="sort-reviews-button">
               {currentSort.charAt(0).toUpperCase() + currentSort.slice(1)}
@@ -25,6 +27,9 @@ const Sort = ({ func, currentSort, reviews }) => {
             </Dropdown.Menu>
           </Dropdown>
         </Col>
+        <Col xs="3">
+          <AddReview id={id} />
+        </Col>
       </Row>
     </div>
   );
@@ -34,6 +39,7 @@ Sort.propTypes = {
   func: PropTypes.func.isRequired,
   currentSort: PropTypes.string.isRequired,
   reviews: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Sort;

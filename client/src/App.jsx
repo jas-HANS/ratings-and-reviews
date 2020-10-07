@@ -10,7 +10,7 @@ import ReviewView from './components/reviewView/reviewView';
 import RatingView from './components/reviewRating/ratingView';
 
 const App = () => {
-  const productId = 200;
+  const productId = 125;
   const [starSort, changeStarSort] = useState([]);
 
   const handleChangeSort = (passed) => {
@@ -19,7 +19,9 @@ const App = () => {
       newArr.splice(newArr.indexOf(passed), 1);
       changeStarSort(newArr);
     } else {
-      changeStarSort(starSort.concat(passed));
+      // newArr.splice(Number(passed), 0, passed);
+      changeStarSort([...starSort, passed]);
+      // changeStarSort(newArr);
     }
   };
 

@@ -7,6 +7,7 @@
     "test": "jest",
     "react-dev": "webpack -d --watch",
     "start": "cd client/dist && live-server",
+    "server": "nodemon server",
     "build": "npm test && webpack -d"
   },
   "repository": {

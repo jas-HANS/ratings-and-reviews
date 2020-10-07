@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import query from '../../../lib/routes';
 import ReviewList from './reviewList';
 import Sort from './dropdownSort';
-import { ProgressBar } from 'react-bootstrap';
 
 const ReviewView = ({ id, starSortArray }) => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
@@ -127,8 +126,8 @@ const ReviewView = ({ id, starSortArray }) => {
 
   return (
     <Container className="review-view">
-      <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />
       <Col>
+        <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} id={id} />
         <Row>
           <ReviewList reviews={shownReviews} help={helpfulIds} report={reportedIds} change={handleAdd} />
         </Row>

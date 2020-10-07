@@ -55,7 +55,7 @@ body {
     padding: 5px;
     width: 110px;
     height: 40px;
-    background-color: #84898C;
+    background-color: #373838;
     color: #F1EEE6;
 }
 .sort-reviews-button:active:focus, .sort-reviews-button:hover, .sort-reviews-button:focus {
@@ -67,13 +67,68 @@ body {
 .sort-reviews-item {
     color: #0F4C81;
 }
+/* Start of AddReview CSS */
+.add-reviews {
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 5px;
+    width: 150px;
+    height: 40px;
+    background-color: #373838;
+    color: #F1EEE6;
+    border-radius: 10px;
+}
+.add-reviews:hover {
+    cursor: pointer;
+    background-color: #B5C7D3;
+    color: #0F4C81;
+}
+.add-reviews-modal {
+    padding: 20px;
+    font-family: 'Kumbh Sans', sans-serif;
+    background-color: #F1EEE6;
+}
+.add-reviews-form {
+    background-color: #B5C7D3;
+}
+.add-review-button {
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 5px;
+    float: right;
+    margin: 10px;
+    width: 150px;
+    height: 40px;
+    background-color: #373838;
+    color: #F1EEE6;
+    border-radius: 10px;
+}
+.add-review-button:hover {
+    cursor: pointer;
+    background-color: #B5C7D3;
+    color: #0F4C81;
+}
+.add-review-title {
+    font-family: 'Kumbh Sans', sans-serif;
+    padding: 10px;
+}
+.add-review-header {
+    font-family: 'Kumbh Sans', sans-serif;
+    color: #0F4C81;
+}
+.add-reviews-body {
+    font-family: 'Crimson Text', serif;
+    color: #373838;
+}
+/* END OF AddReview CSS */
 /* END OF Dropdown Sort CSS */
 /* ReviewList CSS */
 .review-view {
     border: 5px solid #658DC6;
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 10px;
     position: relative;
+    margin-top: 35px;
 }
 .more-reviews {
     position: relative;
@@ -85,10 +140,9 @@ body {
     margin:auto;
     width: 100vmax;
     font-family: 'Crimson Text', serif;
-    opacity: 80%;
     color: #F1EEE6;
     border-radius: 10px;
-    background-color: #84898C;
+    background-color: #373838;
     height: 50px;
 }
 .more-reviews-button:hover {
@@ -205,14 +259,14 @@ body {
     padding-bottom: 0px;
 }
 /* END OF Body Component */
-
 /* END OF ReviewTile CSS */
 /* Rating Breakdown CSS */
 .progress-bar-ratings {
     padding: 10px;
 }
 .progress-bars-ratings {
-    height: 15px;
+    height: 100%;
+    width: 100%;
     background-color: #B5C7D3;
 }
 .progress-bar {
@@ -272,3 +326,47 @@ body {
     margin-bottom: 5px;
 }
 /* END OF Rating Breakdown CSS */
+/* Product Breakdown CSS */
+.product-breakdown-container {
+    border: 5px solid #658DC6;
+    margin-top: 10px;
+    padding: 10px;
+}
+.product-bar-name-row {
+    text-decoration: underline;
+    padding-left: 10px;
+    justify-content: left;
+}
+.product-breakdown-name {
+    font-family: 'Kumbh Sans', sans-serif;
+    color: #0F4C81;
+    font-weight: bolder;
+    padding-bottom: 0px;
+    font-size: 15px;
+    text-align: center;
+}
+.product-bar-row {
+    padding-bottom: 0px;
+    margin: 5px;
+    border: 1px solid #0F4C81;
+    border-radius: 5px;
+}
+.product-bars {
+    height: 100%;
+    width: 100%;
+    background-color: #0F4C81;
+}
+.label-row {
+    padding-bottom: 0px;
+}
+.label-row-col {
+    font-size: 15px;
+    text-align: center;
+    justify-content: center;
+    padding-left: 20px;
+    color: #0F4C81;
+}
+.container-breakdown-single {
+    padding: 5px;
+}
+/* END OF Product Breakdown CSS */
