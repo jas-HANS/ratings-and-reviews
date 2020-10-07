@@ -4,10 +4,21 @@ body {
 
 }
 .title {
+    font-family: 'Kumbh Sans', sans-serif;
     text-align: left;
     margin: 30px;
+    font-size: 20px;
+    text-decoration: underline;
 }
 /* END OF Overall CSS */
+/* RatingStars Component CSS */
+.rating-overall-reviews {
+    font-family: 'Kumbh Sans', sans-serif;
+    padding: 4px;
+    margin-right: 15px;
+    font-weight: bold;
+}
+/* END OF RatingStars CSS */
 /* Dropdown Sort CSS */
 .current-visible {
     font-family: 'Crimson Text', serif;
@@ -59,8 +70,9 @@ body {
 /* END OF Dropdown Sort CSS */
 /* ReviewList CSS */
 .review-view {
-    border: 5px solid #0F4C81;
+    border: 5px solid #658DC6;
     border-radius: 10px;
+    padding: 10px;
     position: relative;
 }
 .more-reviews {
@@ -99,7 +111,7 @@ body {
     padding: 10px;
     margin: 20px;
     margin-top: 30px;
-    border: 2px solid #0F4C81;
+    border: 2px solid #658DC6;
     border-radius: 10px;
 }
 .name-date {
@@ -115,10 +127,6 @@ body {
     text-decoration: underline;
 
 }
-/* .review-tile-break {
-    text-align: center;
-    position: relative;
-} */
 /* Helpful CSS */
 .reviews-reported {
     margin-left: 5px;
@@ -142,6 +150,7 @@ body {
     font-weight: bold;
     font-size: 18px;
     font-family: 'Kumbh Sans', sans-serif;
+    padding-top: 10px;
 }
 .review-summary-extra {
     color: #0F4C81;
@@ -160,7 +169,6 @@ body {
     color: green;
     padding-right: 3px;
     padding-left: 0px;
-    /* background-color: #B5C7D3; */
     border-radius: 6px;
 }
 /* END OF Recommend CSS */
@@ -199,9 +207,68 @@ body {
 /* END OF Body Component */
 
 /* END OF ReviewTile CSS */
-
-/* StarRating Subcomponent of ReviewTile CSS */
-/* .static-stars { */
-    /* any extra styling for static stars on review tiles */
-/* } */
-/* END OF StarRating CSS */
+/* Rating Breakdown CSS */
+.progress-bar-ratings {
+    padding: 10px;
+}
+.progress-bars-ratings {
+    height: 15px;
+    background-color: #B5C7D3;
+}
+.progress-bar {
+    /* transition: 5s ease;
+    transition-delay: 0.5s; */
+    float: left;
+    height: 15px;
+    color: #F1EEE6;
+    background-color: #F5B895;
+    font-size: 10px;
+}
+.rating-breakdown-col {
+    border: 5px solid #658DC6;
+    padding: 10px;
+}
+.rating-breakdown-row {
+    cursor: pointer;
+    margin-right: 30px;
+    margin-left: 5px;
+    border-radius: 10px;
+}
+.rating-breakdown-row:hover {
+    background-color: #658DC6;
+}
+/* RatingView CSS */
+.filtered-by-ratings {
+    font-family: 'Crimson Text', serif;
+    font-size: 12px;
+    color: #B5C7D3;
+    text-align: center;
+}
+.remove-filters-button {
+    justify-content: center;
+    font-family: 'Crimson Text', serif;
+    border: 2px solid #658DC6;
+    color: #F1EEE6;
+    background-color: #84898C;
+    border-radius: 5px;
+    font-size: 10px;
+    height: 20px;
+    width: 80px;
+}
+.remove-filters-button:hover {
+    cursor: pointer;
+    background-color: #B5C7D3;
+    color: #0F4C81;
+}
+.recommend-reviewers {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 13px;
+    color: #0F4C81;
+    background-color: rgb(181,199,211,0.5);
+    border: 2px solid #658DC6;
+    border-radius: 10px;
+    justify-content: center;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+/* END OF Rating Breakdown CSS */

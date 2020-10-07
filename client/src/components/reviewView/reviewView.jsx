@@ -6,17 +6,34 @@ import Col from 'react-bootstrap/Col';
 import query from '../../../lib/routes';
 import ReviewList from './reviewList';
 import Sort from './dropdownSort';
+import { ProgressBar } from 'react-bootstrap';
 
-const ReviewView = () => {
+const ReviewView = ({ id, starSortArray }) => {
   const [reviews, getReviews] = useState([]); // State of reviews for current product
   const [seenReviews, changeSeen] = useState([]); // State of reviews shown on the page
+  const [shownReviews, changeShown] = useState([]);
   const [sort, changeSort] = useState('relevance');
 
+  const [showLess, setShowLess] = useState(false);
   const [helpfulIds, changeHelpfulIds] = useState([]);
   const [reportedIds, changeReportedIds] = useState([]);
 
+  const sortByFilter = (reviewsToSort) => {
+    if (starSortArray[0]) {
+      const changeReviews = [];
+      starSortArray.forEach((rating) => {
+        for (let i = 0; i < reviewsToSort.length; i += 1) {
+          if (reviewsToSort[i].rating === rating) {
+            changeReviews.push(reviewsToSort[i]); // Add the reviews to the new reviews list
+          }
+        }
+      });
+      return changeReviews;
+    }
+    return reviewsToSort;
+  };
+
   useEffect(() => { // Sets the initial state of reviews and seenReviews
-    const id = 4;
     query.getRatingTotals(id, (error, ratings) => {
       if (error) {
         throw error;
@@ -31,12 +48,22 @@ const ReviewView = () => {
           } else {
             getReviews(data.results); // Set the reviews state to the data from the axios request
             let info;
-            if (seenReviews.length === 0) {
-              info = data.results.slice(0, 2);
+            if (shownReviews.length === 0) {
+              if (!starSortArray[0]) {
+                info = data.results.slice(0, 2);
+                changeSeen(data.results);
+              } else {
+                changeSeen(sortByFilter(data.results));
+                info = sortByFilter(data.results).slice(0, shownReviews.length);
+              }
+            } else if (!starSortArray[0]) {
+              changeSeen(data.results);
+              info = data.results.slice(0, shownReviews.length);
             } else {
-              info = data.results.slice(0, seenReviews.length);
+              changeSeen(sortByFilter(data.results));
+              info = sortByFilter(data.results).slice(0, shownReviews.length);
             }
-            changeSeen(info); // Set the initial seen reviews to be only two of the reviews
+            changeShown(info);
           }
         });
       }
@@ -49,7 +76,6 @@ const ReviewView = () => {
   };
 
   const handleAdd = (newId, kind) => {
-    // const newArr = '';
     if (kind === 'help') {
       const newArr = helpfulIds;
       newArr.push(newId);
@@ -61,19 +87,57 @@ const ReviewView = () => {
     }
   };
 
+  useEffect(() => {
+    if (starSortArray[0]) {
+      const newArray = sortByFilter(reviews);
+      changeSeen(newArray);
+      if (shownReviews.length === 0 || shownReviews.length === 1) {
+        changeShown(newArray.slice(0, 2));
+      } else {
+        changeShown(newArray.slice(0, shownReviews.length));
+      }
+    } else {
+      changeSeen(reviews);
+      if (shownReviews.length === 1 || shownReviews.length === 2) {
+        changeShown(reviews.slice(0, 2));
+      } else {
+        changeShown(reviews.slice(0, shownReviews.length));
+      }
+    }
+  }, [starSortArray]);
+
+  useEffect(() => {
+    if (seenReviews.length <= 2 && seenReviews.length === shownReviews.length) {
+      // Set boolean to true
+      setShowLess(true);
+    } else if (shownReviews.length === 0) {
+      // So that the list sets back to two when a filter has no reviews
+      changeShown(reviews.slice(0, 2));
+      setShowLess(false);
+    } else {
+      // Set boolean to false
+      setShowLess(false);
+    }
+  });
+
+  // Conditionally render the button if there are NOT less than 2 total in the list
+  const showButton = showLess
+    ? ''
+    : <button type="button" className="more-reviews-button" onClick={() => changeShown(seenReviews.slice(0, 2))}>Less Reviews</button>;
+
   return (
     <Container className="review-view">
       <Sort func={handleDropdownChange} currentSort={sort} reviews={reviews} />
       <Col>
         <Row>
-          <ReviewList reviews={seenReviews} help={helpfulIds} change={handleAdd} />
+          <ReviewList reviews={shownReviews} help={helpfulIds} report={reportedIds} change={handleAdd} />
         </Row>
         <Row className="more-reviews">
-          {reviews.length === seenReviews.length
-            ? <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, 2))}>Less Reviews</button>
-            : <button type="button" className="more-reviews-button" onClick={() => changeSeen(reviews.slice(0, seenReviews.length + 2))}>More Reviews</button> }
+          {seenReviews.length === shownReviews.length
+            ? showButton
+            : <button type="button" className="more-reviews-button" onClick={() => changeShown(seenReviews.slice(0, shownReviews.length + 2))}>More Reviews</button> }
           <div className="current-visible">
-            {`(${seenReviews.length}) Currently visible.`}
+            {`(${shownReviews.length} Currently shown)`}
           </div>
         </Row>
       </Col>

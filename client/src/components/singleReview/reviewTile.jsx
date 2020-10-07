@@ -9,7 +9,7 @@ import ReviewBody from './reviewBody';
 import Summary from './reviewSum';
 import Helpful from './reviewHelpful';
 
-const ReviewTile = ({ data, help, change }) => {
+const ReviewTile = ({ data, help, change, report }) => {
   const [dateVal, changeDate] = useState(''); // Set the state for the date
   const [comma, changeComma] = useState(undefined);
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -47,7 +47,7 @@ const ReviewTile = ({ data, help, change }) => {
       </Badge>
       <Summary summary={data.summary} />
       <ReviewBody body={data.body} recommend={data.recommend} photos={data.photos} />
-      <Helpful helpfulness={data.helpfulness} id={data.review_id} help={help} change={change} />
+      <Helpful helpfulness={data.helpfulness} id={data.review_id} help={help} change={change} report={report} />
     </div>
   );
 };
@@ -65,6 +65,7 @@ ReviewTile.propTypes = {
     photos: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   }).isRequired,
   help: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  report: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default ReviewTile;

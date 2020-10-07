@@ -11,7 +11,7 @@ const Rating = ({ rate }) => (
       starEmptyColor="#B5C7D3"
       numberOfStars={5}
       starDimension="20px"
-      starSpacing="2px"
+      starSpacing="1px"
       name="rating"
     />
   </div>

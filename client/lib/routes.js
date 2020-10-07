@@ -12,6 +12,12 @@ const getRatingTotals = (id, callback) => {
     .catch((err) => callback(err, null));
 };
 
+const getRecommendedTotal = (id, callback) => {
+  axios.get(`http://52.26.193.201:3000/reviews/${id}/meta`)
+    .then((data) => callback(null, data.data.recommended))
+    .catch((err) => callback(err, null));
+};
+
 const putHelpfulReview = (id, callback) => {
   axios.put(`http://52.26.193.201:3000/reviews/helpful/${id}`)
     .then(() => callback(null))
@@ -29,4 +35,5 @@ export default {
   putHelpfulReview,
   getRatingTotals,
   putReportedReview,
+  getRecommendedTotal,
 };
