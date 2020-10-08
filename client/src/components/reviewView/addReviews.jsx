@@ -34,50 +34,50 @@ const AddReview = ({ id }) => {
     // Handle the change of changeCharacteristics to the individual data
     // from each characteristic list
     const form = event.currentTarget;
+    event.preventDefault();
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
     } else {
       const reviewObject = {
         rating: rate,
         summary: titleText,
         body: bodyText,
-        recommend,
+        recommend: recommend,
         name: nickname,
-        email,
+        email: email,
         characteristics: {},
-        photos: [],
+        photos: [''],
       };
       if (isValid) {
         // Handle the post of a review section here
-        query.postNewReview(id, (err) => {
+        query.postNewReview(id, reviewObject, (err) => {
           if (err) {
             throw err;
           } else {
             changeShown(false);
+            // Add in logic to allow for re-render of the page/
             console.log('Success!');
           }
         });
       } else { // If the body element is not valid up to 60 chars
-        event.preventDefault();
         console.log('Not Valid');
       }
     }
     setValidated(true);
   };
 
-  // const handleChangeChar = (identity, info) => {
-  //   const newObj = { ...chars };
-  //   newObj[identity] = info;
-  //   // changeCharacteristics(newObj);
-  // };
+  const handleChangeChar = (identity, info) => {
+    const newObj = { ...chars };
+    newObj[identity] = info;
+    // changeCharacteristics(newObj);
+  };
 
-  useEffect(() => {
-    const starMeaning = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
-    setMeaning(starMeaning[rate - 1]); // Set the meaning to be one less than the rating
-    // This is because there is no 0 star rating and no 6 star rating so the
-    // 1 star will show the 0 index
-  }, [rate]);
+  // useEffect(() => {
+  //   const starMeaning = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
+  //   setMeaning(starMeaning[rate - 1]); // Set the meaning to be one less than the rating
+  //   // This is because there is no 0 star rating and no 6 star rating so the
+  //   // 1 star will show the 0 index
+  // }, [rate]);
 
   useEffect(() => {
     query.getCharacteristics(id, (err, data) => {
@@ -136,11 +136,11 @@ const AddReview = ({ id }) => {
                   <Form.Label className="add-review-header" style={{ paddingRight: "10px" }}>
                     Would you recommend this product?
                   </Form.Label>
-                  <Form.Check required className="add-reviews-body" inline name="radio-yes-no" type="radio" label="Yes" onClick={() => changeRec('Yes')} />
-                  <Form.Check required className="add-reviews-body" inline name="radio-yes-no" type="radio" label="No" onClick={() => changeRec('No')} />
+                  <Form.Check required className="add-reviews-body" inline name="radio-yes-no" type="radio" label="Yes" onClick={() => changeRec(true)} />
+                  <Form.Check required className="add-reviews-body" inline name="radio-yes-no" type="radio" label="No" onClick={() => changeRec(false)} />
                   <Form.Control.Feedback type="invalid">Required *</Form.Control.Feedback>
                 </Form.Group>
-                {/* <FormCharacteristics characteristics={charArr} data={charData} change={handleChangeChar} /> */}
+                <FormCharacteristics characteristics={charArr} data={charData} change={handleChangeChar} />
               </Col>
               <Col xs="5">
                 <Form.Group>

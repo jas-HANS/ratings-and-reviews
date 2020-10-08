@@ -126,7 +126,8 @@ body {
     color: #373838;
 }
 .close-add-reviews {
-    background-color: #F1EEE6;
+    background-color: #373838;
+    color: #F1EEE6;
     font-weight: bolder;
     width: 30px;
     height: 30px;
@@ -136,8 +137,9 @@ body {
     border-radius: 5px;
 }
 .close-add-reviews:hover {
-    background-color: #373838;
-    color: #F1EEE6;
+    background-color: #F1EEE6;
+    color: #373838;
+    
 }
 /* END OF AddReview CSS */
 /* END OF Dropdown Sort CSS */
