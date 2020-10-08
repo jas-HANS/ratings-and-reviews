@@ -10,6 +10,11 @@ body {
     font-size: 20px;
     text-decoration: underline;
 }
+.form-control.is-valid, .was-validated .form-control:valid {
+    background-image: none;
+    border: none;
+    outline: none !important;
+}
 /* END OF Overall CSS */
 /* RatingStars Component CSS */
 .rating-overall-reviews {
@@ -119,6 +124,20 @@ body {
 .add-reviews-body {
     font-family: 'Crimson Text', serif;
     color: #373838;
+}
+.close-add-reviews {
+    background-color: #F1EEE6;
+    font-weight: bolder;
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    margin: 5px;
+    padding-top: 3px;
+    border-radius: 5px;
+}
+.close-add-reviews:hover {
+    background-color: #373838;
+    color: #F1EEE6;
 }
 /* END OF AddReview CSS */
 /* END OF Dropdown Sort CSS */
