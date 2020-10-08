@@ -62,7 +62,7 @@ body {
     height: 40px;
     background-color: #373838;
     color: #F1EEE6;
-    border: 2px solid #658DC6;
+    border: 2px solid #658DC6 !important;
 }
 .sort-reviews-button:active:focus, .sort-reviews-button:hover, .sort-reviews-button:focus {
     outline: none !important;
