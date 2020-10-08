@@ -62,12 +62,13 @@ body {
     height: 40px;
     background-color: #373838;
     color: #F1EEE6;
+    border: 2px solid #658DC6;
 }
 .sort-reviews-button:active:focus, .sort-reviews-button:hover, .sort-reviews-button:focus {
     outline: none !important;
     box-shadow: none !important;
-    background-color: #B5C7D3 !important;
-    color: #0F4C81 !important;
+    background-color: #0F4C81 !important;
+    color: #F1EEE6 !important;
 }
 .sort-reviews-item {
     color: #0F4C81;
@@ -82,11 +83,12 @@ body {
     background-color: #373838;
     color: #F1EEE6;
     border-radius: 10px;
+    border: 2px solid #658DC6;
 }
 .add-reviews:hover {
     cursor: pointer;
-    background-color: #B5C7D3;
-    color: #0F4C81;
+    background-color: #0F4C81;
+    color: #F1EEE6;
 }
 .add-reviews-modal {
     padding: 20px;
@@ -107,11 +109,12 @@ body {
     background-color: #373838;
     color: #F1EEE6;
     border-radius: 10px;
+    border: 2px solid #658DC6;
 }
 .add-review-button:hover {
     cursor: pointer;
-    background-color: #B5C7D3;
-    color: #0F4C81;
+    background-color: #0F4C81;
+    color: #F1EEE6;
 }
 .add-review-title {
     font-family: 'Kumbh Sans', sans-serif;
@@ -135,10 +138,11 @@ body {
     margin: 5px;
     padding-top: 3px;
     border-radius: 5px;
+    border: 2px solid #658DC6;
 }
 .close-add-reviews:hover {
-    background-color: #F1EEE6;
-    color: #373838;
+    background-color: #0F4C81;
+    color: #F1EEE6;
     
 }
 /* END OF AddReview CSS */
@@ -165,11 +169,12 @@ body {
     border-radius: 10px;
     background-color: #373838;
     height: 50px;
+    border: 2px solid #658DC6;
 }
 .more-reviews-button:hover {
     cursor: pointer;
-    background-color: #B5C7D3;
-    color: #0F4C81;
+    background-color: #0F4C81;
+    color: #F1EEE6;
 }
 .review-container {
     overflow: scroll;
@@ -264,15 +269,16 @@ body {
 }
 .show-more-less {
     outline: none !important;
-    opacity: 70%;
+    opacity: 80%;
     color: #F1EEE6;
     border-radius: 10px;
-    background-color: #84898C;
+    background-color: #373838;
+    border: 1px solid #B5C7D3;
 }
 .show-more-less:hover {
     cursor: pointer;
-    background-color: #B5C7D3;
-    color: #0F4C81;
+    background-color: #0F4C81;
+    color: #F1EEE6;
 }
 .thumbnail-image-row {
     padding-left: 15px;

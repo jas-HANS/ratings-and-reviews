@@ -4,12 +4,17 @@ import Form from 'react-bootstrap/Form';
 
 const Characteristic = ({ characteristic, data, change }) => {
   const [currentStats, changeStats] = useState([]);
-  const [currentRating, changeRating] = useState(0);
-  const [charId, changeId] = useState(0);
   // need to pass back up the id and the rating for a specific characteristic
   // Handle the data coming in
   // Will come in as an object with an id and value
   // Each object key will be the characteristic name
+
+  // const [currentPick, changePick] = useState(0);
+
+  // useEffect(() => {
+  //   change(data.id, currentPick);
+  // }, [isSubmit]);
+
   useEffect(() => {
     if (characteristic === 'Fit') {
       changeStats(['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']);
@@ -24,7 +29,6 @@ const Characteristic = ({ characteristic, data, change }) => {
     } else if (characteristic === 'Size') {
       changeStats(['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too big']);
     }
-    changeId(data.id);
   }, []);
 
   return (
@@ -32,11 +36,11 @@ const Characteristic = ({ characteristic, data, change }) => {
       <Form.Row style={{ justifyContent: 'left', fontSize: '20px' }}>
         <Form.Label className="add-review-header" style={{ padding: "2px" }}>{`${characteristic}:`}</Form.Label>
       </Form.Row>
-      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[0]} onClick={() => { change(charId, 1); }} />
-      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[1]} onClick={() => { change(charId, 2); }} />
-      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[2]} onClick={() => { change(charId, 3); }} />
-      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[3]} onClick={() => { change(charId, 4); }} />
-      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[4]} onClick={() => { change(charId, 5); }} />
+      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[0]} onClick={() => { change(data.id, 1); }} />
+      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[1]} onClick={() => { change(data.id, 2); }} />
+      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[2]} onClick={() => { change(data.id, 3); }} />
+      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[3]} onClick={() => { change(data.id, 4); }} />
+      <Form.Check inline required className="add-reviews-body" name={`form-check-${characteristic}`} type="radio" label={currentStats[4]} onClick={() => { change(data.id, 5); }} />
     </Form.Group>
   );
 };
