@@ -36,6 +36,12 @@ const putReportedReview = (id, callback) => {
     .catch((err) => callback(err));
 };
 
+const postNewReview = (productId, newReviewBody, callback) => {
+  axios.post(`http://52.26.193.201:3000/reviews/${productId}`, newReviewBody)
+    .then(() => callback(null))
+    .catch((err) => callback(err));
+};
+
 export default {
   searchReviews,
   putHelpfulReview,
@@ -43,4 +49,5 @@ export default {
   putReportedReview,
   getRecommendedTotal,
   getCharacteristics,
+  postNewReview,
 };

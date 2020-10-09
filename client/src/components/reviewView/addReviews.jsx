@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
-import StarRatings from 'react-star-ratings';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -10,89 +9,123 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
 import query from '../../../lib/routes';
-import Characteristic from './formCharacteristics';
+import FormCharacteristics from './formChars';
+import Stars from './addComponents/starComp';
+import Recommend from './addComponents/recComp';
+import Title from './addComponents/titleComp';
+import Body from './addComponents/bodyComp';
 
 const AddReview = ({ id }) => {
   const [isShown, changeShown] = useState(false);
-  const [characteristics, changeChars] = useState([]);
-  const [rate, setRating] = useState(0);
-  const [ratingMeaning, setMeaning] = useState('');
+  const [charArr, changeCharArr] = useState([]);
+  const [charData, changeCharData] = useState([]);
+
+  const [rate, changeRate] = useState(0);
+  const [bodyText, changeBodyText] = useState('');
+  const [titleText, changeTitleText] = useState('');
+  const [nickname, changeNickname] = useState('');
+  const [email, changeEmail] = useState('');
+  const [recommend, changeRec] = useState('');
+  const [chars, changeCharacteristics] = useState({});
+
+  const [validated, setValidated] = useState(false);
+
+  // const [isSubmitted, setSubmit] = useState(false);
+
+  const [isValid, changeIsValid] = useState(false);
+  const [isInvalid, changeIsInvalid] = useState(false);
 
   useEffect(() => {
-    const starMeaning = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
-    setMeaning(starMeaning[rate - 1]); // Set the meaning to be one less than the rating
-    // This is because there is no 0 star rating and no 6 star rating so the
-    // 1 star will show the 0 index
-  }, [rate]);
+    if (bodyText.length !== 0) {
+      if (bodyText.length < 60) {
+        changeIsValid(false);
+        changeIsInvalid(true);
+      } else {
+        changeIsInvalid(false);
+        changeIsValid(true);
+      }
+    } else {
+      changeIsInvalid(false);
+      changeIsValid(false);
+    }
+  }, [bodyText]);
+
+  const handleSubmit = (event) => {
+    // Handle the change of changeCharacteristics to the individual data
+    // from each characteristic list
+    const form = event.currentTarget;
+    event.preventDefault();
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      const reviewObject = {
+        rating: rate,
+        summary: titleText,
+        body: bodyText,
+        recommend: recommend,
+        name: nickname,
+        email: email,
+        characteristics: chars,
+        photos: [''],
+      };
+      console.log(reviewObject);
+      if (isValid) {
+        // Handle the post of a review section here
+        query.postNewReview(id, reviewObject, (err) => {
+          if (err) {
+            throw err;
+          } else {
+            // Add in logic to allow for re-render of the page
+            changeShown(false);
+            window.location.reload();
+            console.log('Success!');
+          }
+        });
+      } else { // If the body element is not valid up to 60 chars
+        console.log('Not Valid');
+      }
+    }
+    setValidated(true);
+  };
 
   useEffect(() => {
     query.getCharacteristics(id, (err, data) => {
       if (err) {
         throw err;
       } else {
-        changeChars(Object.keys(data));
+        changeCharArr(Object.keys(data));
+        changeCharData(data);
       }
     });
-  }, []);
+  }, [id]);
 
   return (
     <div>
       <button type="button" className="add-reviews" onClick={() => changeShown(true)}>Add a Review</button>
-      <Modal dialogClassName="add-reviews-modal" show={isShown} onHide={() => changeShown(false)} size="xl">
+      <Modal dialogClassName="add-reviews-modal" show={isShown} size="xl" onHide={() => alert('Click the X button to exit this window')}>
         {/* Forms */}
-        <Form className="add-reviews-form">
+        <Form className="add-reviews-form" noValidate validated={validated} onSubmit={handleSubmit}>
+          <button type="button" className="close-add-reviews" onClick={() => changeShown(false)}>X</button>
           <h1 className="add-review-title">Add Review</h1>
           <Container>
             <Row>
               <Col xs="7">
-                <Form.Group>
-                  <Form.Label className="add-review-header" style={{ paddingRight: "10px" }}>
-                    Overall Rating:
-                  </Form.Label>
-                  <StarRatings
-                    rating={rate}
-                    starRatedColor="#F5B895"
-                    starHoverColor="#F5B895"
-                    starEmptyColor="#F1EEE6"
-                    numberOfStars={5}
-                    starDimension="30px"
-                    starSpacing="1px"
-                    changeRating={(rating) => setRating(rating)}
-                    />
-                  <span style={{ paddingLeft: '10px' }} className="add-reviews-body">{ratingMeaning}</span>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label className="add-review-header" style={{ paddingRight: "10px" }}>
-                    Would you recommend this product?
-                  </Form.Label>
-                  <Form.Check className="add-reviews-body" inline name="radio-yes-no" type="radio" label="Yes" />
-                  <Form.Check className="add-reviews-body" inline name="radio-yes-no" type="radio" label="No" />
-                </Form.Group>
-                {characteristics ? characteristics.map((char) => (
-                  <Characteristic key={uuidv4()} characteristic={char} />
-                )) : ''}
+                <Stars callback={changeRate} />
+                <Recommend callback={changeRec} />
+                <FormCharacteristics characteristics={charArr} data={charData} change={changeCharacteristics} />
               </Col>
               <Col xs="5">
-                <Form.Group>
-                  <Form.Label className="add-review-header">
-                    Review Title:
-                  </Form.Label>
-                  <Form.Control className="add-reviews-body" as="textarea" rows="1" placeholder="eg. Best Shoes Ever!" required />
-                  <Form.Control.Feedback>Provide at least 60 chars!</Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label className="add-review-header">
-                    Review Summary:
-                  </Form.Label>
-                  <Form.Control className="add-reviews-body" as="textarea" rows="4" placeholder="Tell us more!" required />
-                </Form.Group>
+                <Title callback={changeTitleText} />
+                <Body callback={changeBodyText} isValid={isValid} isInvalid={isInvalid} />
                 <Form.Row>
                   <Col>
                     <Form.Group>
                       <Form.Label className="add-review-header">
                         Nickname:
                       </Form.Label>
-                      <Form.Control className="add-reviews-body" type="text" placeholder="Example: jackson11!" required />
+                      <Form.Control className="add-reviews-body" type="text" placeholder="Example: jackson11!" required onChange={(e) => changeNickname(e.target.value)} />
+                      <Form.Control.Feedback type="invalid">* Required</Form.Control.Feedback>
+                      <Form.Control.Feedback type="valid">Looks Good!</Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                   <Col>
@@ -100,7 +133,9 @@ const AddReview = ({ id }) => {
                       <Form.Label className="add-review-header">
                         Email Address:
                       </Form.Label>
-                      <Form.Control className="add-reviews-body" type="email" placeholder="jackson11@email.com" required />
+                      <Form.Control className="add-reviews-body" type="email" placeholder="jackson11@email.com" required onChange={(e) => changeEmail(e.target.value)} />
+                      <Form.Control.Feedback type="invalid">* Required</Form.Control.Feedback>
+                      <Form.Control.Feedback type="valid">Looks Good!</Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                 </Form.Row>
