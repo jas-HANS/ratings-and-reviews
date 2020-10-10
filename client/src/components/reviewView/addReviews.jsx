@@ -27,10 +27,9 @@ const AddReview = ({ id }) => {
   const [email, changeEmail] = useState('');
   const [recommend, changeRec] = useState('');
   const [chars, changeCharacteristics] = useState({});
+  const [images, changeImages] = useState({});
 
   const [validated, setValidated] = useState(false);
-
-  // const [isSubmitted, setSubmit] = useState(false);
 
   const [isValid, changeIsValid] = useState(false);
   const [isInvalid, changeIsInvalid] = useState(false);
@@ -66,9 +65,8 @@ const AddReview = ({ id }) => {
         name: nickname,
         email: email,
         characteristics: chars,
-        photos: [''],
+        photos: [images],
       };
-      console.log(reviewObject);
       if (isValid) {
         // Handle the post of a review section here
         query.postNewReview(id, reviewObject, (err) => {
@@ -143,7 +141,7 @@ const AddReview = ({ id }) => {
                   <Form.File.Label className="add-review-header">
                     Upload an Image!
                   </Form.File.Label>
-                  <Form.File.Input className="add-reviews-body" />
+                  <Form.File.Input className="add-reviews-body" onChange={(e) => changeImages(URL.createObjectURL(e.target.files[0]))} />
                 </Form.File>
                 <button type="submit" className="add-review-button">Add Review!</button>
               </Col>

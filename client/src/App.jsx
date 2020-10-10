@@ -19,9 +19,7 @@ const App = () => {
       newArr.splice(newArr.indexOf(passed), 1);
       changeStarSort(newArr);
     } else {
-      // newArr.splice(Number(passed), 0, passed);
       changeStarSort([...starSort, passed]);
-      // changeStarSort(newArr);
     }
   };
 
