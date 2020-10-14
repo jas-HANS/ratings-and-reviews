@@ -5,6 +5,8 @@ http://52.26.193.201:3000/
 ### Use of Parameters
 In an HTTP GET request, parameters are sent as a query string. In an HTTP POST or PUT request, the parameters are not sent along with the URI, but in the request body. Parameters noted for each route below follow this standard.
 
+![database](https://sec-image-bucket.s3.us-east-2.amazonaws.com/SDC.DB.Relationships.v1.png)
+
 ### GET List Reviews
 Returns a list of reviews for a particular product.  This list *does not* include any reported reviews.
 `GET /reviews/:product_id/list`
