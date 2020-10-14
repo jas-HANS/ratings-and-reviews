@@ -39,3 +39,5 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 //  ratings: object
 //  recommended: object
 //  characteristics: object
+
+// set models
