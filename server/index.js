@@ -1,4 +1,8 @@
 const express = require('express');
+const mongoose = require('mongoose');
+
+const mongoDB = 'mongodb://127.0.0.1/SDC';
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 const PORT = 3001;
@@ -6,7 +10,8 @@ const PORT = 3001;
 app.use(express.static('../client/dist'));
 
 app.listen(PORT, () => {
-  console.log(`Server running and listening now on port: ${PORT}`);
+  // eslint-disable-next-line no-console
+  console.log(`Server running and listening on port: ${PORT}`);
 });
 
 // Route Connections
