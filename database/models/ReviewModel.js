@@ -16,53 +16,20 @@ const mongoose = require('mongoose');
 //   Map
 //   Schema
 
+// id,product_id,rating,date,summary,body,recommend,reported,
+//  reviewer_name,reviewer_email,response,helpfulness
 const reviewSchema = new mongoose.Schema({
   product_id: Number,
   rating: Number,
+  date: String,
   summary: String,
   body: String,
-  recommend: Number,
-  name: String,
-  email: String,
+  recommend: Boolean,
+  reported: Boolean,
+  reviewer_name: String,
+  reviewer_email: String,
+  response: String,
   helpfulness: Number,
-  report: Boolean,
-  photos: [{
-    id: Number,
-    thumbnail_url: String,
-    url: String,
-  }],
-  characteristics: {
-    ratings: {
-      1: Number,
-      2: Number,
-      3: Number,
-      4: Number,
-      5: Number,
-    },
-    recommended: {
-      0: Number,
-      1: Number,
-      null: Number,
-    },
-    characteristics: {
-      Fit: {
-        id: Number,
-        value: Number,
-      },
-      Length: {
-        id: Number,
-        value: Number,
-      },
-      Comfort: {
-        id: Number,
-        value: Number,
-      },
-      Quality: {
-        id: Number,
-        value: Number,
-      },
-    },
-  },
 });
 // compile schema into a Model. A model is a class with which we construct documents.
 const Review = mongoose.model('Review', reviewSchema);
