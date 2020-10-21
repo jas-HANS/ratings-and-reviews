@@ -8,7 +8,8 @@
     "react-dev": "webpack -d --watch",
     "start": "cd client/dist && live-server",
     "server": "cd server && node index.js",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "seed": "cd database && node seed.js && mongoimport --db SDC --collection reviews --file ./entries.json"
   },
   "repository": {
     "type": "git",
