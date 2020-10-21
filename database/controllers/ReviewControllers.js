@@ -1,5 +1,5 @@
 // define queries here
-const { Review } = require('../models/ReviewModel');
+import { Review } from '../models/ReviewModel';
 
 const ReviewController = {
   getAllReviews: (productId, callback) => {
@@ -30,42 +30,24 @@ const ReviewController = {
       }
     });
   },
-  getReviewPhotos: (reviewId, callback) => {
-    Review.find({ _id: reviewId }, (error, response) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, response.photos);
-      }
-    });
-  },
-  getRatings: (productId, callback) => {
-    Review.find({ product: productId }, (error, response) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, response.characteristics.ratings);
-      }
-    });
-  },
-  getCharacteristics: (productId, callback) => {
-    Review.find({ product: productId }, (error, response) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, response.characteristics.characteristics);
-      }
-    });
-  },
-  getRecommended: (productId, callback) => {
-    Review.find({ product: productId }, (error, response) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, response.characteristics.recommended);
-      }
-    });
-  },
+  // getRatings: (productId, callback) => {
+  //   Review.find({ product: productId }, (error, response) => {
+  //     if (error) {
+  //       callback(error, null);
+  //     } else {
+  //       callback(null, response.characteristics.ratings);
+  //     }
+  //   });
+  // },
+  // getRecommended: (productId, callback) => {
+  //   Review.find({ product: productId }, (error, response) => {
+  //     if (error) {
+  //       callback(error, null);
+  //     } else {
+  //       callback(null, response.characteristics.recommended);
+  //     }
+  //   });
+  // },
   setReported: (reviewId, callback) => {
     Review.findOneAndUpdate({ _id: reviewId }, (error, response) => {
       if (error) {
@@ -75,15 +57,15 @@ const ReviewController = {
       }
     });
   },
-  getReported: (reviewId, callback) => {
-    Review.findOne({ _id: reviewId }, (error, response) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, response.report);
-      }
-    });
-  },
+  // getReported: (reviewId, callback) => {
+  //   Review.findOne({ _id: reviewId }, (error, response) => {
+  //     if (error) {
+  //       callback(error, null);
+  //     } else {
+  //       callback(null, response.report);
+  //     }
+  //   });
+  // },
   setHelpfulness: (reviewId, callback) => {
     Review.findOneAndUpdate({ _id: reviewId }, (error, response) => {
       if (error) {
@@ -93,17 +75,17 @@ const ReviewController = {
       }
     });
   },
-  getHelpfulness: (reviewId, callback) => {
-    Review.findOne({ _id: reviewId }, (error, response) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, response.helpfulness);
-      }
-    });
-  },
+  // getHelpfulness: (reviewId, callback) => {
+  //   Review.findOne({ _id: reviewId }, (error, response) => {
+  //     if (error) {
+  //       callback(error, null);
+  //     } else {
+  //       callback(null, response.helpfulness);
+  //     }
+  //   });
+  // },
 };
 
-module.exports = {
+export default {
   ReviewController,
 };
