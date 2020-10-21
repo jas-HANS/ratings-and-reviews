@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import express, { static } from 'express';
 import { connect, connection } from 'mongoose';
 import { json, urlencoded } from 'body-parser';
 import cors from 'cors';
-import { ReviewController } from '../database/controllers/ReviewControllers';
+import ReviewController from '../database/controllers/ReviewControllers';
+
+const express = require('express');
 
 const mongoDB = 'mongodb://localhost:27017/SDC';
 connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -11,7 +12,7 @@ connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const app = express();
 const PORT = 3002;
 
-app.use(static('../client/dist'));
+app.use(express.static('../client/dist'));
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(cors());
