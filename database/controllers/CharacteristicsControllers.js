@@ -6,7 +6,7 @@ const CharacteristicsController = {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, response);
+        callback(null, response.name);
       }
     });
   },
