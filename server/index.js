@@ -1,19 +1,19 @@
 /* eslint-disable no-console */
-const express = require('express');
-const mongoose = require('mongoose');
-const parser = require('body-parser');
-const cors = require('cors');
-const { ReviewController } = require('../database/controllers/ReviewControllers');
+import express, { static } from 'express';
+import { connect, connection } from 'mongoose';
+import { json, urlencoded } from 'body-parser';
+import cors from 'cors';
+import { ReviewController } from '../database/controllers/ReviewControllers';
 
 const mongoDB = 'mongodb://localhost:27017/SDC';
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 const PORT = 3002;
 
-app.use(express.static('../client/dist'));
-app.use(parser.json());
-app.use(parser.urlencoded({ extended: true }));
+app.use(static('../client/dist'));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 app.use(cors());
 
 app.listen(PORT, () => {
@@ -21,7 +21,7 @@ app.listen(PORT, () => {
   console.log(`Server running and listening on port: ${PORT}`);
 });
 
-const db = mongoose.connection;
+const db = connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Route Connections
