@@ -16,24 +16,12 @@ const writeALot = (writer, encoding, callback) => {
     do {
       i -= 1;
       product += 1;
-      // Generate characeristicValues object
-      // Characteristics
-      //   product_id: faker.random.number()
-      //   name: faker.productAdjective()
-
-      // Generate characteristics object
-      // CharacteristicsReviews
-      // const generateCharacteristicsReviews = () => {
-      //    characteristic_id: faker.random.number(),
-      //    review_id: faker.random.number(),
-      //    value: faker.random.number(),
-      // };
 
       // Generate reviewPhotos object
       const generatePhotos = () => {
         const photos = [];
-        for (let index = 0; index < Math.floor(Math.random() * Math.floor(5)); index += 1) {
-          const random = Math.floor(Math.random() * Math.floor(6));
+        const random = Math.floor(Math.random() * Math.floor(6));
+        for (let index = 0; index < random; index += 1) {
           photos.push(
             {
               _id: { $oid: mongoose.Types.ObjectId() },
@@ -71,15 +59,6 @@ const writeALot = (writer, encoding, callback) => {
         }
         return reviews;
       };
-      // Generate metadata
-      // const newMeta = JSON.stringify({
-      //   _id: { $oid: mongoose.Types.ObjectId() },
-      //   product_id: product,
-      //   ratings: generateRatings(),
-      //   recommended: generateRecommended(),
-      //   characteristics: generateCharacteristics(),
-      // });
-
       // Generate product
       const newEntry = JSON.stringify({
         _id: { $oid: mongoose.Types.ObjectId() },
