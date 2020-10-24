@@ -1,3 +1,4 @@
+// start seeding with npm run seed
 /* eslint-disable no-console */
 const faker = require('faker');
 const mongoose = require('mongoose');
@@ -8,15 +9,17 @@ const writeEntries = fs.createWriteStream('entries.json'); // creates json file
 
 // Function
 const writeALot = (writer, encoding, callback) => {
-  let i = 10000000; // number of items to write
+  let i = 10; // number of items to write
   let product = 0;
 
   const write = () => {
-    let ok = true;
+    const ok = true;
     do {
       i -= 1;
       product += 1;
-
+      if (i % 10000 === 0) {
+        console.log('writing record ', i);
+      }
       // Generate reviewPhotos object
       const generatePhotos = () => {
         const photos = [];
@@ -34,46 +37,59 @@ const writeALot = (writer, encoding, callback) => {
       };
 
       // Generate review object
+      // add array bracket before and then add after string
+      // create a variable to hold new obj
+      // stringify variable and pass to write
       // eslint-disable-next-line no-loop-func
       const generateReviews = () => {
         const reviews = [];
         const random = Math.floor(Math.random() * Math.floor(6));
         for (let index = 0; index < random; index += 1) {
-          reviews.push(
-            {
-              _id: { $oid: mongoose.Types.ObjectId() },
-              product_id: product,
-              rating: random,
-              date: faker.date.recent(),
-              summary: faker.lorem.sentence(),
-              body: faker.lorem.paragraph(),
-              recommend: faker.random.boolean(),
-              reported: faker.random.boolean(),
-              reviewer_name: faker.internet.userName(),
-              reviewer_email: faker.internet.email(),
-              response: faker.lorem.sentence(),
-              helpfulness: faker.random.number(),
-              photos: generatePhotos(),
-            },
-          );
+          // writer.write(JSON.stringify({
+          //   _id: { $oid: mongoose.Types.ObjectId() },
+          //   product_id: product,
+          //   rating: random,
+          //   date: faker.date.recent(),
+          //   summary: faker.lorem.sentence(),
+          //   body: faker.lorem.paragraph(),
+          //   recommend: faker.random.boolean(),
+          //   reported: faker.random.boolean(),
+          //   reviewer_name: faker.internet.userName(),
+          //   reviewer_email: faker.internet.email(),
+          //   response: faker.lorem.sentence(),
+          //   helpfulness: faker.random.number(),
+          //   photos: generatePhotos(),
+          // }), encoding, callback);
+          writer.write(JSON.stringify({
+            _id: { $oid: mongoose.Types.ObjectId() },
+            product_id: product,
+            rating: random,
+            date: faker.date.recent(),
+            summary: faker.lorem.sentence(),
+            body: faker.lorem.paragraph(),
+            recommend: faker.random.boolean(),
+            reported: faker.random.boolean(),
+            reviewer_name: faker.internet.userName(),
+            reviewer_email: faker.internet.email(),
+            response: faker.lorem.sentence(),
+            helpfulness: faker.random.number(),
+            photos: generatePhotos(),
+          }), encoding, callback);
         }
         return reviews;
       };
-      // Generate product
-      const newEntry = JSON.stringify({
-        _id: { $oid: mongoose.Types.ObjectId() },
-        page: 0,
-        count: 0,
-        results: generateReviews(),
-      });
-      if (i === 0) {
-        writer.write(newEntry, encoding, callback);
-      } else {
-        // see if we should continue, or wait
-        // don't pass the callback, because we're not done yet.
-        ok = writer.write(newEntry, encoding);
-      }
+      generateReviews();
+
+      // if (i === 0) {
+      //   // const rev = generateReviews();
+      //   // writer.write(rev, encoding, callback);
+      // } else {
+      //   // see if we should continue, or wait
+      //   // don't pass the callback, because we're not done yet.
+      //   ok = writer.write(JSON.stringify(generateReviews()), encoding);
+      // }
     } while (i > 0 && ok);
+
     if (i > 0) {
     // had to stop early!
     // write some more once it drains

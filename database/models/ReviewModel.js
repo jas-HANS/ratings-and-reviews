@@ -20,20 +20,30 @@ const mongoose = require('mongoose');
 //  reviewer_name,reviewer_email,response,helpfulness
 const reviewSchema = new mongoose.Schema({
   product_id: Number,
-  rating: Number,
-  date: String,
+  // rating: Number,
+  // date: String,
   summary: String,
-  body: String,
-  recommend: Boolean,
-  reported: Boolean,
-  reviewer_name: String,
-  reviewer_email: String,
-  response: String,
-  helpfulness: Number,
+  // body: String,
+  // recommend: Boolean,
+  // reported: Boolean,
+  // reviewer_name: String,
+  // reviewer_email: String,
+  // response: String,
+  // helpfulness: Number,
 });
 // compile schema into a Model. A model is a class with which we construct documents.
 const Review = mongoose.model('Review', reviewSchema);
 
-module.exports = {
-  Review,
-};
+// const review = new Review({
+//   product_id: 90000,
+//   summary: 'Summary String2',
+// }).save((error, response) => {
+//   console.log('error within save', error, 'response within save', response);
+// });
+
+console.log('hello');
+// Review.findOne({ product_id: 90000 }, (response, error) => {
+//   console.log('response in model', response, 'and error', error);
+// });
+
+// module.exports = Review;

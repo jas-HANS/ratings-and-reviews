@@ -1,20 +1,20 @@
 /* eslint-disable no-console */
-import { connect, connection } from 'mongoose';
-import { json, urlencoded } from 'body-parser';
-import cors from 'cors';
-import ReviewController from '../database/controllers/ReviewControllers';
-
+const cors = require('cors');
+const mongoose = require('mongoose');
 const express = require('express');
+const bodyParser = require('body-parser');
+const ReviewController = require('../database/controllers/ReviewControllers');
 
 const mongoDB = 'mongodb://localhost:27017/SDC';
-connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 const PORT = 3002;
 
 app.use(express.static('../client/dist'));
-app.use(json());
-app.use(urlencoded({ extended: true }));
+app.use(bodyParser.json());
+// app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.listen(PORT, () => {
@@ -22,9 +22,35 @@ app.listen(PORT, () => {
   console.log(`Server running and listening on port: ${PORT}`);
 });
 
-const db = connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('success');
+  const reviewSchema = new mongoose.Schema({
+    product_id: Number,
+    summary: String,
+  });
+  // compile schema into a Model. A model is a class with which we construct documents.
+  const Review = mongoose.model('Review', reviewSchema);
 
+  const review = new Review({
+    product_id: 90000,
+    summary: 'Summary String2',
+  }).save((error, response) => {
+    console.log('error within save', error, 'response within save', response);
+  });
+
+  console.log('hello');
+  Review.findOne({ product_id: 90000 }, (response, error) => {
+    console.log('response in model', response, 'and error', error);
+  });
+});
+// db
+//   .then(() => console.log(`Connected to: ${mongoDB}`))
+//   .catch((err) => {
+//     console.log(`There was a problem connecting to mongo at: ${mongoDB}`);
+//     console.log(err);
+//   });
 // Route Connections
 
 // get request for all reviews for a single product
@@ -52,13 +78,18 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // });
 
 app.get('/reviews/:product_id/list', (req, res) => {
-  ReviewController.getAllReviews(req.params.id, (error, doc) => {
-    if (error) {
-      res.status(500).send(error);
-    } else {
-      res.status(200).send(doc);
-    }
-  });
+  ReviewController.getAllReviews(
+    req.params.product_id, req.params.count, req.params.page,
+    (error, doc) => {
+      if (error) {
+        console.log('doc in get req error', doc);
+        res.status(500).send(error);
+      } else {
+        console.log('doc in get req success', doc);
+        res.status(200).send(doc);
+      }
+    },
+  );
 });
 
 // get request for a single product's metadata
@@ -67,22 +98,22 @@ app.get('/reviews/:product_id/list', (req, res) => {
 //   send a failed status and send failed message OR log error message
 //  else
 //   set a successful status and send data
-app.get('/reviews/:product_id/meta', (req, res) => {
-  console.log(req.params.product_id);
-  const dummyObj = {
-    product_id: req.params.product_id,
-    ratings: {},
-    recommended: {},
-    characteristics: {},
-  };
-  // query db for all characteristics for product 2
-  // then map over result of query
-  // convert to api results model
-  // set dummy obj results to new obj and send that back
-  // const result = Review.findById({ product_id: 2 });
+// app.get('/reviews/:product_id/meta', (req, res) => {
+//   console.log(req.params.product_id);
+//   const dummyObj = {
+//     product_id: req.params.product_id,
+//     ratings: {},
+//     recommended: {},
+//     characteristics: {},
+//   };
+// query db for all characteristics for product 2
+// then map over result of query
+// convert to api results model
+// set dummy obj results to new obj and send that back
+// const result = Review.findById({ product_id: 2 });
 
-  res.send(dummyObj);
-});
+//   res.send(dummyObj);
+// });
 
 // req.body (content of review) will be used AND req.params (product id)
 // post request for adding a single review to a single product
