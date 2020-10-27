@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
@@ -10,8 +11,9 @@ const connection = mysql.createConnection({
 connection.connect();
 
 const getReviews = (paramsObj, callback) => {
+  console.log(paramsObj);
   const sql = `SELECT * FROM reviews WHERE product_id=${paramsObj.product_id}`;
-  connection.query(sql, (error, results) => {
+  connection.query(sql, paramsObj.product_id, (error, results) => {
     if (error) {
       callback(error, null);
     } else {
