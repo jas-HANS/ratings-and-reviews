@@ -32,19 +32,19 @@ CREATE TABLE IF NOT EXISTS photos (
     ON DELETE NO ACTION
 );
 
-INSERT INTO reviews (product_id, rating, summary, body, recommend, reviewer_name, reviewer_email) VALUES (1, 5, "Test Summary", "Test Body", true, "Tester McTesting", "Testing@test.com");
-INSERT INTO photos (review_id, url) VALUES (1, "http://placeimg.com/200/200");
+-- INSERT INTO reviews (product_id, rating, summary, body, recommend, reviewer_name, reviewer_email) VALUES (1, 5, "Test Summary", "Test Body", true, "Tester McTesting", "Testing@test.com");
+-- INSERT INTO photos (review_id, url) VALUES (1, "http://placeimg.com/200/200");
 
--- LOAD DATA INFILE 'path.csv' 
--- INTO TABLE reviews 
--- FIELDS TERMINATED BY ',' 
--- ENCLOSED BY '"'
--- LINES TERMINATED BY '\n'
--- IGNORE 1 ROWS;
+LOAD DATA LOCAL INFILE '/Users/alisonsipos/Desktop/hr_senior/reviews.csv' 
+INTO TABLE reviews 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
 
--- LOAD DATA INFILE 'path.csv' 
--- INTO TABLE photos 
--- FIELDS TERMINATED BY ',' 
--- ENCLOSED BY '"'
--- LINES TERMINATED BY '\n'
--- IGNORE 1 ROWS;
+LOAD DATA LOCAL INFILE '/Users/alisonsipos/Desktop/hr_senior/reviews_photos.csv' 
+INTO TABLE photos 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
