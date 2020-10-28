@@ -36,7 +36,14 @@ INSERT INTO reviews (product_id, rating, summary, body, recommend, reviewer_name
 INSERT INTO photos (review_id, url) VALUES (1, "http://placeimg.com/200/200");
 
 -- LOAD DATA INFILE 'path.csv' 
--- INTO TABLE tablename 
+-- INTO TABLE reviews 
+-- FIELDS TERMINATED BY ',' 
+-- ENCLOSED BY '"'
+-- LINES TERMINATED BY '\n'
+-- IGNORE 1 ROWS;
+
+-- LOAD DATA INFILE 'path.csv' 
+-- INTO TABLE photos 
 -- FIELDS TERMINATED BY ',' 
 -- ENCLOSED BY '"'
 -- LINES TERMINATED BY '\n'
