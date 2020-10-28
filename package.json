@@ -7,7 +7,7 @@
     "test": "jest",
     "react-dev": "webpack -d --watch",
     "start": "cd client/dist && live-server",
-    "server": "cd server && node index.js",
+    "server": "cd server && nodemon index.js",
     "build": "webpack -p",
     "seed": "mysql -u root -p < database/schema.sql"
   },
