@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
@@ -11,7 +10,6 @@ const connection = mysql.createConnection({
 connection.connect();
 
 const getReviews = (paramsObj, callback) => {
-  console.log('paramsObj in get reviews query', paramsObj);
   const sql = `SELECT * FROM reviews WHERE product_id=${paramsObj.product_id}`;
   connection.query(sql, paramsObj.product_id, (error, results) => {
     if (error) {
@@ -21,16 +19,6 @@ const getReviews = (paramsObj, callback) => {
     }
   });
 };
-
-// newReviewBody = {
-//   product_id INT NOT NULL,
-//   rating INT NOT NULL,
-//   summary TINYTEXT NOT NULL,
-//   body MEDIUMTEXT NOT NULL,
-//   recommend BOOLEAN NOT NULL,
-//   reviewer_name VARCHAR(50) NOT NULL,
-//   reviewer_email VARCHAR(255) NOT NULL,
-// }
 
 const postReview = (paramsObj, callback) => {
   const sql = 'INSERT INTO reviews (product_id, rating, summary, body, recommend, reviewer_name, reviewer_email) VALUES (?, ?, ?, ?, ?, ?, ?)';
@@ -53,13 +41,25 @@ const postReview = (paramsObj, callback) => {
 };
 
 const helpfulReview = (paramsObj, callback) => {
-  // const sql = 'UPDATE reviews SET helpfulness = helpfulness + 1';
-  console.log(paramsObj);
+  const sql = 'UPDATE reviews SET helpfulness = helpfulness + 1';
+  connection.query(sql, paramsObj.review_id, (error, results) => {
+    if (error) {
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
 };
 
 const harmfulReview = (paramsObj, callback) => {
-  // const sql = 'UPDATE reviews SET reported = true WHERE id = reviewId';
-  console.log(paramsObj);
+  const sql = `UPDATE reviews SET reported = true WHERE id = ${paramsObj.review_id}`;
+  connection.query(sql, paramsObj.review_id, (error, results) => {
+    if (error) {
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
 };
 
 module.exports = {
