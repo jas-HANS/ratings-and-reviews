@@ -5,13 +5,13 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'LoveBud',
-  database: 'reviewData',
+  database: 'review_data',
 });
 
 connection.connect();
 
 const getReviews = (paramsObj, callback) => {
-  console.log(paramsObj);
+  console.log('paramsObj in get reviews query', paramsObj);
   const sql = `SELECT * FROM reviews WHERE product_id=${paramsObj.product_id}`;
   connection.query(sql, paramsObj.product_id, (error, results) => {
     if (error) {
@@ -52,7 +52,19 @@ const postReview = (paramsObj, callback) => {
   });
 };
 
+const helpfulReview = (paramsObj, callback) => {
+  // const sql = 'UPDATE reviews SET helpfulness = helpfulness + 1';
+  console.log(paramsObj);
+};
+
+const harmfulReview = (paramsObj, callback) => {
+  // const sql = 'UPDATE reviews SET reported = true WHERE id = reviewId';
+  console.log(paramsObj);
+};
+
 module.exports = {
   getReviews,
   postReview,
+  helpfulReview,
+  harmfulReview,
 };
